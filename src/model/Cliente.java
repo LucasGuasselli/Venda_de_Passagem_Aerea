@@ -13,14 +13,14 @@ public class Cliente {
     
     //atributos
     private String nome;
-    private int RG;
+    private String rg;
     private String telefone;
     
     //construtor
     
-    public Cliente(String nome, int RG, String telefone){
+    public Cliente(String nome,String rg, String telefone){
         this.nome = nome;
-        this.RG = RG;
+        this.rg = rg;
         this.telefone = telefone;
         
     }//fecha construtor
@@ -32,8 +32,8 @@ public class Cliente {
     public void setNome(String nome){
         this.nome = nome;
     }
-    public void setRG(int RG){
-        this.RG = RG;
+    public void setRg(String rg){
+        this.rg = rg;
     }
     public void setTelefone(String telefone){
         this.telefone = telefone;
@@ -42,8 +42,8 @@ public class Cliente {
     public String getNome(){
         return this.nome;
     }
-    public int getRG(){
-        return this.RG;
+    public String getRg(){
+        return this.rg;
     }
     public String getTelefone(){
         return this.telefone;
@@ -53,7 +53,7 @@ public class Cliente {
     @Override
     public String toString(){
         return  "\nNome: " + getNome()
-               + "\nRG: " + getRG()
+               + "\nRG: " + getRg()
                + "\nTelefone: " + getTelefone() + "\n";
     }//fecha toString
 }//fecha classe
