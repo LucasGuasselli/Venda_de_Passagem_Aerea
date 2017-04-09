@@ -21,7 +21,7 @@ public class RepositorioClientes {
     //metodos
     
     //adiciona cliente no Array
-    public boolean addPacientes(Cliente cliente) {
+    public boolean addCliente(Cliente cliente) {
         return (clientes.add(cliente));
     }//fecha addPaciente
 
@@ -47,13 +47,23 @@ public class RepositorioClientes {
     *Procura clientes existentes no Array pelo seu rg
     *se a condicao for verdadeira, retorna o objeto CLIENTE, se nao retorna NULL
     */
-    public Cliente searchCliente(String rg) {
+    public boolean searchCliente(String rg) {
         for (Cliente cliente : clientes) {
             if (cliente.getRg().equals(rg)) {
-                return cliente;
+                System.out.println("###################################\n");
+                System.out.println(String.format("%-10s", "RG") + "\t"
+                    + String.format("%-20s", "|NOME") + "\t"
+                    + String.format("%-15s", "|TELEFONE"));
+            
+                System.out.println(String.format("%-10s", cliente.getRg()) + "\t"
+                        + String.format("%-20s", "|" + cliente.getNome()) + "\t"
+                        + String.format("%-15s", "|" + cliente.getTelefone()));
+                return true;
            }//fecha if
+            
         }//fecha for
-        return null;
+        return false;
+      
     }//fecha searchCliente
 }//fecha classe
 

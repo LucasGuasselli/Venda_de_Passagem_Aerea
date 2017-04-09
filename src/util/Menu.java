@@ -18,14 +18,15 @@ public class Menu {
 	}//fecha addOption
 
 	public void show() {		
-		for (int i = 0; i < numOpcoes; i++) {
+                System.out.println("###################################");
+                    for (int i = 0; i < numOpcoes; i++) {
 			
 				if(i==numOpcoes-1){
 					System.out.println("[" + "0" +  "] " +opcoes[i].getTexto());
 				}else{
-					System.out.println("["+ i+1 + "] "+ opcoes[i].getTexto());
+					System.out.println("["+ (i+1) + "] "+ opcoes[i].getTexto());
 				}//fecha if-else
-		}//fecha for
+                    }//fecha for
 		System.out.println("ESCOLHA UMA OPÇÃO: ");
 	}//fecha show
 
