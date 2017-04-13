@@ -12,19 +12,36 @@ import util.Digita;
 
 /**
  *
- * @author lucas
+ * @author Lucas Guasselli de Moraes
+ * @version 1.0
+ * @since 08/04/2017
+ * 
  */
 public class ClienteUI {
     
     private Digita d = new Digita();
     
     public void cadCliente(RepositorioClientes lista){
-        String rg = d.Digita("Digite o rg do Cliente: ");
+        //variaveis locais
+            int limit = 10;
+            String rg = "0000000000";
+        do{
+            rg = d.Digita("(min 4 e max 10 digitos)\nDigite o rg do Cliente: ");
+        }while(rg.length() > limit || rg.length() <= 3);
+       
+        
             if(lista.clienteExist(rg)){
                 System.out.println("Cliente ja esta cadastrado");
             }else{
+               //variaveis locais
                 String nome = d.Digita("Digite o nome do Cliente: ");
-                String telefone = d.Digita("Digite o telefone do Cliente: ");
+                String telefone = "(00)00000-0000";
+                limit = 14;
+                
+                    do{
+                      telefone = d.Digita("(min 8 e max 14 digitos)\nDigite "
+                            + "o telefone do Cliente: ");                    
+                    }while(telefone.length() > limit || telefone.length() <= 7);
                 try{
                   lista.addCliente(new Cliente(nome, rg, telefone));    
             } catch (Exception e){
@@ -41,7 +58,9 @@ public class ClienteUI {
            System.out.println("Nao existem clentes cadastrados!!!!");
        }else{
            System.out.println("###################################\n");
-            System.out.println(String.format("%-10s", "RG") + "\t"
+           
+           //formatacao para exibir Clientes
+           System.out.println(String.format("%-10s", "RG") + "\t"
                     + String.format("%-20s", "|NOME") + "\t"
                     + String.format("%-15s", "|TELEFONE"));
             for (Cliente cliente : lista.getListClientes()) {
@@ -59,7 +78,7 @@ public class ClienteUI {
           
        if(lista.searchCliente(rg) == false){
            System.out.println("Cliente nao cadastrado!!!!");
-       }
+       }//fecha if
         
-    }
+    }//fecha metodo search
 }//fecha classe

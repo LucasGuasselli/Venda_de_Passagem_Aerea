@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package util;
-
+/**
+ *
+ * @author Lucas Guasselli de Moraes
+ * @version 1.0
+ * @since 08/04/2017
+ * 
+ */
 public class Menu {
     Digita d = new Digita();
 	Opcao[] opcoes = new Opcao[15];

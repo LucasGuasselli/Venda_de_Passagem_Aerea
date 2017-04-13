@@ -9,7 +9,10 @@ import java.util.Scanner;
 
 /**
  *
- * @author lucas
+ * @author Lucas Guasselli de Moraes
+ * @version 1.0
+ * @since 08/04/2017
+ * 
  */
 public class Digita {
     
