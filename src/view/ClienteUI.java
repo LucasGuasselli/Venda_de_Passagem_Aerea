@@ -23,6 +23,7 @@ public class ClienteUI {
     
     public void cadCliente(RepositorioClientes lista){
         //variaveis locais
+     
             int limit = 10;
             String rg = "0000000000";
         do{
@@ -76,7 +77,7 @@ public class ClienteUI {
     public void searchCliente(RepositorioClientes lista){
       String rg = d.Digita("Informe o RG do cliente: ");
           
-       if(lista.searchCliente(rg) == false){
+       if(lista.searchClienteByRg(rg) == false){
            System.out.println("Cliente nao cadastrado!!!!");
        }//fecha if
         

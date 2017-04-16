@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package view;
-import javax.swing.JOptionPane;
+
+import repositorio.RepositorioAvioes;
 import util.Opcao;
 import util.Menu;
 import repositorio.RepositorioClientes;
+import repositorio.RepositorioVoos;
 /**
  *
  * @author Lucas Guasselli de Moraes
@@ -17,26 +19,36 @@ import repositorio.RepositorioClientes;
  */
 
 public class MenuUI {
-    public void executar(){        
-      
+    
+    //atributos
+    private RepositorioClientes listaClientes; 
+    private RepositorioAvioes listaAvioes;
+    private RepositorioVoos listaVoos;
+    private int opcao;
+    
+    //construtor
+    public MenuUI(){
+            listaClientes = new RepositorioClientes();  
+            listaAvioes = new RepositorioAvioes();
+            listaVoos = new RepositorioVoos();
+    }//fecha construtor     
+    
+    public void executar(){      
+        
+        MenuClienteUI menuCliUI = new MenuClienteUI(listaClientes);
+        MenuAviaoUI menuAviUI = new MenuAviaoUI(listaAvioes);
+        
+
         //criando opcoes
-        Opcao cadCli = new Opcao("Cadastrar cliente");
-        Opcao verCli = new Opcao("Vizualizar cliente");
-        Opcao pesquisaCliRg = new Opcao("Pesquisa cliente pelo RG");
+        Opcao menuCliente = new Opcao("Acessar o menu de cliente");
+        Opcao menuAviao = new Opcao("Acessar o menu de avioes");
         Opcao sair = new Opcao("Sair");
         
         Menu menu = new Menu();
-        
-        //adicionando opcoes ao menu
-        menu.addOption(cadCli);
-        menu.addOption(verCli);
-        menu.addOption(pesquisaCliRg);
+        menu.addOption(menuCliente);
+        menu.addOption(menuAviao);
         menu.addOption(sair);
         
-        RepositorioClientes listaClientes = new RepositorioClientes();
-        ClienteUI cliUI = new ClienteUI();
-        int opcao;
-       
         try{
         do{
             //mostra opcoes adicionadas no menu
@@ -44,16 +56,17 @@ public class MenuUI {
             opcao = menu.getOption();
             switch(opcao){
                 case 1:
-                        cliUI.cadCliente(listaClientes);
+                        menuCliUI.menuCliente();
                     break;
                 case 2:
-                        cliUI.showClientes(listaClientes);
+                        menuAviUI.menuAviao();
                     break;
                 case 3:
-                        cliUI.searchCliente(listaClientes);
+                        
                     break;
                 case 0:
-                        System.out.println("Aplicacao finalizada!!!");
+                    System.out.println("###################################");   
+                    System.out.println("Aplicacao finalizada!!!");
                     break;
                 default:
                     System.out.println("Digite uma opcao valida!!!");
@@ -64,5 +77,6 @@ public class MenuUI {
             }catch (Exception e){
                 System.out.println("USO SOMENTE DE NUMEROS INTEIROS PARA NAVEGAR NO MENU!");
             }//fecha try-catch
+    
     }//fecha executar
 }//fecha classe

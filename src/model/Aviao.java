@@ -13,5 +13,59 @@ package model;
  * 
  */
 public class Aviao {
+  
+    //atributos
+    private static int codigo_autoIncrement = 1;
+    private int codigo;
+    private String nome; 
+    private int qtdeAssentos;
+
+    //construtor
+    public Aviao(String nome, int qtdeAssentos) {
+        this.codigo = increment();
+        this.nome = nome;
+        this.qtdeAssentos = qtdeAssentos;
+    }//fecha construtor
+
+    //metodos 
     
-}
+    //SETS E GETS
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setQtdeAssentos(int qtdeAssentos) {
+        this.qtdeAssentos = qtdeAssentos;
+    }
+
+    //TERMINA SETS    
+    
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getQtdeAssentos() {
+        return qtdeAssentos;
+    }
+    
+    //TERMINA GETS
+    
+    private int increment(){
+        return (codigo_autoIncrement++);
+    }
+     @Override
+    public String toString(){
+        return  "\nCodigo: " + getCodigo()
+               + "\nNome: " + getNome()
+               + "\nQuantidade de assentos: " + getQtdeAssentos() + "\n";
+    }//fecha toString
+ 
+}//fecha aviao

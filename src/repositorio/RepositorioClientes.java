@@ -35,11 +35,11 @@ public class RepositorioClientes {
 
     /*
     *Verifica se o cliente existe por meio do atributo RG
-    *Se cliente ja existir, return TRUE, se não return FALSE;
+    *Se o cliente ja existir, return TRUE, se não return FALSE;
     */
-    public boolean clienteExist(String RG) {
+    public boolean clienteExist(String rg) {
         for (Cliente cliente : clientes) {
-            if (cliente.getRg().equals(RG)) {
+            if (cliente.getRg().equals(rg)) {
                 return true;
             }//fecha if
         }//fecha for-each
@@ -50,7 +50,7 @@ public class RepositorioClientes {
     *Procura clientes existentes no Array pelo seu rg
     *se a condicao for verdadeira, retorna o objeto CLIENTE, se nao retorna NULL
     */
-    public boolean searchCliente(String rg) {
+    public boolean searchClienteByRg(String rg) {
         for (Cliente cliente : clientes) {
             if (cliente.getRg().equals(rg)) {
                 System.out.println("###################################\n");
