@@ -37,16 +37,19 @@ public class MenuUI {
         
         MenuClienteUI menuCliUI = new MenuClienteUI(listaClientes);
         MenuAviaoUI menuAviUI = new MenuAviaoUI(listaAvioes);
+        MenuVooUI menuVooUI = new MenuVooUI(listaVoos, listaAvioes);
         
 
         //criando opcoes
         Opcao menuCliente = new Opcao("Acessar o menu de cliente");
         Opcao menuAviao = new Opcao("Acessar o menu de avioes");
+        Opcao menuVoo = new Opcao("Acessar o menu de voos");
         Opcao sair = new Opcao("Sair");
         
         Menu menu = new Menu();
         menu.addOption(menuCliente);
         menu.addOption(menuAviao);
+         menu.addOption(menuVoo);
         menu.addOption(sair);
         
         try{
@@ -62,7 +65,7 @@ public class MenuUI {
                         menuAviUI.menuAviao();
                     break;
                 case 3:
-                        
+                        menuVooUI.menuVoo();
                     break;
                 case 0:
                     System.out.println("###################################");   

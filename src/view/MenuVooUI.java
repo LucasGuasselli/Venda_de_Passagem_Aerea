@@ -5,56 +5,57 @@
  */
 package view;
 
-import repositorio.RepositorioClientes;
+import repositorio.RepositorioAvioes;
+import repositorio.RepositorioVoos;
 import util.Menu;
 import util.Opcao;
 
 /**
  *
  * @author Lucas Guasselli de Moraes
- * @version 1.3
- * @since 13/04/2017
+ * @version 1.4
+ * @since 16/04/2017
  * 
  */
-public class MenuClienteUI {
-    
-      
-        Opcao cadCli = new Opcao("Cadastrar cliente");
-        Opcao verCli = new Opcao("Vizualizar clientes");
-        Opcao pesquisaCliRg = new Opcao("Pesquisa cliente pelo RG");
+public class MenuVooUI {
+        Opcao cadVoo = new Opcao("Cadastrar voo");
+        Opcao verVoo = new Opcao("Vizualizar voos");
+        Opcao pesquisaVooByAviao = new Opcao("Pesquisa voo pelo aviao");
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
         Menu menu = new Menu();
        
        
-        private RepositorioClientes lista;
+        private RepositorioVoos listaVoos;
+        private RepositorioAvioes listaAvioes;
         int opcao;
         
-        ClienteUI cliUI = new ClienteUI();
+        VooUI VooUI = new VooUI();
         
         //construtor
-        public MenuClienteUI(RepositorioClientes lista) {
-           this.lista = lista;
-           menu.addOption(cadCli);
-           menu.addOption(verCli);
-           menu.addOption(pesquisaCliRg);
+        public MenuVooUI(RepositorioVoos listaVoos, RepositorioAvioes listaAvioes) {
+           this.listaVoos = listaVoos;
+           this.listaAvioes = listaAvioes;
+           menu.addOption(cadVoo);
+           menu.addOption(verVoo);
+           menu.addOption(pesquisaVooByAviao);
            menu.addOption(menuPrincipal);
         }//fecha construtor
         
-        public void menuCliente(){
+        public void menuVoo(){
             do{
                  //mostra opcoes adicionadas no menu
                 menu.show();
                 opcao = menu.getOption();
                  switch(opcao){
                     case 1:
-                        cliUI.cadCliente(lista);
+                        VooUI.cadVoo(listaVoos, listaAvioes);
                         break;
                     case 2:
-                        cliUI.showClientes(lista);
+                        VooUI.showVoos(listaVoos);
                         break;
                     case 3:
-                        cliUI.searchCliente(lista);
+                        VooUI.searchVoo(listaVoos ,listaAvioes);
                         break;
                     case 0:
                         System.out.println("Retornando ao menu principal");

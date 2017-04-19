@@ -5,7 +5,6 @@
  */
 package vendaPassagem;
 
-import java.io.FileNotFoundException;
 import view.MenuUI;
 
 /**

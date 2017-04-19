@@ -63,9 +63,16 @@ public class Aviao {
     }
      @Override
     public String toString(){
-        return  "\nCodigo: " + getCodigo()
-               + "\nNome: " + getNome()
-               + "\nQuantidade de assentos: " + getQtdeAssentos() + "\n";
+        return  (String.format("%-10s", "CODIGO DO AVIAO") + "\t"
+                   + String.format("%-20s", "|NOME DO AVIAO") + "\t"
+                      + String.format("%-15s", "|QUANTIDADE DE ASSENTOS"))
+              + "\n" + ((String.format("%-10s", getCodigo()) + "\t"
+                        + String.format("%-20s", "|" + getNome()) + "\t"
+                         + String.format("%-15s", "|" + getQtdeAssentos()))) + "\n";
+               /* "Codigo do aviao: " + getCodigo()
+               + "\nNome do aviao: " + getNome()
+               + "\nQuantidade de assentos do aviao: " + getQtdeAssentos() + "\n";
+               */
     }//fecha toString
  
 }//fecha aviao

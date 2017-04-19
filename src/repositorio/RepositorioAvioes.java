@@ -27,7 +27,7 @@ public class RepositorioAvioes {
     //metodos
     
     //adiciona aviao no Array
-    public boolean addCliente(Aviao aviao) {
+    public boolean addAviao(Aviao aviao) {
         return (avioes.add(aviao));
     }//fecha addPaciente
 
@@ -41,9 +41,18 @@ public class RepositorioAvioes {
     *Se o aviao ja existir, return TRUE, se não return FALSE;
     */
  
-    public boolean AviaoExist(String nome) {
+    public boolean AviaoExistByName(String nome) {
         for (Aviao aviao : avioes) {
             if (aviao.getNome().equals(nome)) {
+                return true;
+            }//fecha if
+        }//fecha for-each
+        return false;
+    }//fecha clienteExist
+    
+    public boolean AviaoExistByCod(int codigo) {
+        for (Aviao aviao : avioes) {
+            if (aviao.getCodigo() == codigo) {
                 return true;
             }//fecha if
         }//fecha for-each
@@ -73,4 +82,16 @@ public class RepositorioAvioes {
       
     }//fecha searchCliente
     
+    public Aviao retornaAviao(int codigo){
+        for(Aviao aviao : avioes){
+            if(aviao.getCodigo() == codigo){
+                return aviao;
+            }//fecha if
+           }//fecha for
+        //RETORNO CRIADO APENAS PARA PODER RETORNAR O OBJETO AVIAO
+        //CODIGO NAO DEVE CHEGAR NESTE RETORNO
+        
+            Aviao Aviao = null;
+        return Aviao;
+    }//fecha classe
 }//fecha classe

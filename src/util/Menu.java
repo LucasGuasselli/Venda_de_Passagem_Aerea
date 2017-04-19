@@ -24,7 +24,7 @@ public class Menu {
 	}//fecha addOption
 
 	public void show() {		
-                System.out.println("###################################");
+                System.out.println("\n###################################\n");
                     for (int i = 0; i < numOpcoes; i++) {
 			
 				if(i==numOpcoes-1){

@@ -51,6 +51,7 @@ public class RepositorioClientes {
     *se a condicao for verdadeira, retorna o objeto CLIENTE, se nao retorna NULL
     */
     public boolean searchClienteByRg(String rg) {
+       
         for (Cliente cliente : clientes) {
             if (cliente.getRg().equals(rg)) {
                 System.out.println("###################################\n");

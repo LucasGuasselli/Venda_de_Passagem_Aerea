@@ -5,7 +5,6 @@
  */
 package view;
 
-import java.util.List;
 import model.Cliente;
 import repositorio.RepositorioClientes;
 import util.Digita;
@@ -27,7 +26,7 @@ public class ClienteUI {
             int limit = 10;
             String rg = "0000000000";
         do{
-            rg = d.Digita("(min 4 e max 10 digitos)\nDigite o rg do Cliente: ");
+            rg = d.Digita("\n(min 4 e max 10 digitos)\nDigite o rg do Cliente: ");
         }while(rg.length() > limit || rg.length() <= 3);
        
         
@@ -35,16 +34,17 @@ public class ClienteUI {
                 System.out.println("Cliente ja esta cadastrado");
             }else{
                //variaveis locais
-                String nome = d.Digita("Digite o nome do Cliente: ");
+                String nome = d.Digita("\nDigite o nome do Cliente: ");
                 String telefone = "(00)00000-0000";
                 limit = 14;
                 
                     do{
-                      telefone = d.Digita("(min 8 e max 14 digitos)\nDigite "
+                      telefone = d.Digita("\n(min 8 e max 14 digitos)\nDigite "
                             + "o telefone do Cliente: ");                    
                     }while(telefone.length() > limit || telefone.length() <= 7);
                 try{
-                  lista.addCliente(new Cliente(nome, rg, telefone));    
+                  lista.addCliente(new Cliente(nome, rg, telefone)); 
+                    System.out.println("CLIENTE CADASTRADO COM SUCESSO!!!");
             } catch (Exception e){
                     System.out.println("ERRO ao cadastrar cliente");
               }//try-catch
@@ -75,11 +75,13 @@ public class ClienteUI {
     }//fecha metodo
     
     public void searchCliente(RepositorioClientes lista){
-      String rg = d.Digita("Informe o RG do cliente: ");
-          
-       if(lista.searchClienteByRg(rg) == false){
-           System.out.println("Cliente nao cadastrado!!!!");
-       }//fecha if
-        
+        if(lista.getListClientes().size() > 0){
+            String rg = d.Digita("Informe o RG do cliente: ");
+                if(lista.searchClienteByRg(rg) == false){
+                   System.out.println("Cliente nao cadastrado!!!!");
+                }//fecha if
+        }else{
+            System.out.println("NAO EXISTEM CLIENTES CADASTRADOS");
+        }//fecha-if-else
     }//fecha metodo search
 }//fecha classe

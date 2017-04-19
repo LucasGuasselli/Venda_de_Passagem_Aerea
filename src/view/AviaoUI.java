@@ -24,11 +24,11 @@ public class AviaoUI {
             int limit = 30;
             String nome = "";
         do{
-            nome = d.Digita("(min 3 e max 30 caracteres)\nDigite o nome do Aviao: ");
+            nome = d.Digita("\n(min 3 e max 30 caracteres)\nDigite o nome do Aviao: ");
         }while(nome.length() > limit || nome.length() <= 3);
        
         
-            if(lista.AviaoExist(nome)){
+            if(lista.AviaoExistByName(nome)){
                 System.out.println("Aviao ja esta cadastrado");
             }else{
                //variaveis locais
@@ -37,11 +37,12 @@ public class AviaoUI {
                 limit = 200;
                 
                     do{
-                      assentos = Integer.parseInt(d.Digita("(min 80 e max 200 assentos)"
+                      assentos = Integer.parseInt(d.Digita("\n(min 80 e max 200 assentos)"
                               + "\nDigite a quantidade de assentos do Aviao: "));                    
                     }while(assentos > limit || assentos <= 79);
                 try{
-                  lista.addCliente(new Aviao(nome, assentos));    
+                  lista.addAviao(new Aviao(nome, assentos));
+                    System.out.println("aVIAO CADASTRADO COM SUCESSO!!!");
             } catch (Exception e){
                     System.out.println("ERRO ao cadastrar aviao");
               }//try-catch
@@ -72,11 +73,13 @@ public class AviaoUI {
     }//fecha metodo
     
     public void searchAviao(RepositorioAvioes lista){
-      int codigo = Integer.parseInt(d.Digita("Informe o Codigo do aviao: "));
-          
-       if(lista.searchAviaoByCodigo(codigo) == false){
-           System.out.println("Aviao nao cadastrado!!!!");
-       }//fecha if
-    
+        if(lista.getListAvioes().size() > 0){  
+            int codigo = Integer.parseInt(d.Digita("Informe o Codigo do aviao: "));
+                if(lista.searchAviaoByCodigo(codigo) == false){
+                   System.out.println("Aviao nao cadastrado!!!!");
+                }//fecha if
+            }else{
+                System.out.println("NAO EXISTEM AVIOES CADASTRADOS");
+        }//FECHA IF-ELSE
     }//fecha metodo search
 }//fecha classe
