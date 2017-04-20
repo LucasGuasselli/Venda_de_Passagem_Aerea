@@ -57,8 +57,11 @@ public class Cliente {
     
     @Override
     public String toString(){
-        return  "\nNome: " + getNome()
-               + "\nRG: " + getRg()
-               + "\nTelefone: " + getTelefone() + "\n";
-    }//fecha toString
+        return  (String.format("%-10s", "RG") + "\t"
+                   + String.format("%-20s", "|NOME") + "\t"
+                      + String.format("%-15s", "|TELEFONE"))
+              + "\n" + ((String.format("%-10s", getRg()) + "\t"
+                        + String.format("%-20s", "|" + getNome()) + "\t"
+                         + String.format("%-15s", "|" + getTelefone()))) + "\n";
+        }//fecha toString
 }//fecha classe

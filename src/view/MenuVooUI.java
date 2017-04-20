@@ -21,6 +21,8 @@ public class MenuVooUI {
         Opcao cadVoo = new Opcao("Cadastrar voo");
         Opcao verVoo = new Opcao("Vizualizar voos");
         Opcao pesquisaVooByAviao = new Opcao("Pesquisa voo pelo aviao");
+        Opcao verAssentos = new Opcao("Ver disponibilidade de assentos");
+
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
         Menu menu = new Menu();
@@ -39,10 +41,12 @@ public class MenuVooUI {
            menu.addOption(cadVoo);
            menu.addOption(verVoo);
            menu.addOption(pesquisaVooByAviao);
+           menu.addOption(verAssentos);
            menu.addOption(menuPrincipal);
         }//fecha construtor
         
         public void menuVoo(){
+            try{
             do{
                  //mostra opcoes adicionadas no menu
                 menu.show();
@@ -57,6 +61,9 @@ public class MenuVooUI {
                     case 3:
                         VooUI.searchVoo(listaVoos ,listaAvioes);
                         break;
+                    case 4:
+                        VooUI.verAssentos(listaVoos, listaAvioes);
+                        break;
                     case 0:
                         System.out.println("Retornando ao menu principal");
                         break;
@@ -65,6 +72,8 @@ public class MenuVooUI {
                         break;
             }//fecha switch-case            
         }while(opcao != 0);
-            
+            }catch (Exception e){
+                System.out.println("USO SOMENTE DE NUMEROS INTEIROS PARA NAVEGAR NOS MENUS!");
+            }//FECHA TRY-CATCH
         }//fecha metodo menuCliente
 }//fecha classe

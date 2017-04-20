@@ -6,12 +6,11 @@
 package repositorio;
 
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import model.Aviao;
 import model.Voo;
+import util.VerificaDatas;
 
 /**
  *
@@ -21,7 +20,8 @@ import model.Voo;
  * 
  */
 public class RepositorioVoos {
-     private List<Voo> voos;
+    private VerificaDatas verifica = new VerificaDatas();
+    private List<Voo> voos;
     
     //construtor ja instanciando um novo ArrayList
     public RepositorioVoos() {
@@ -93,20 +93,36 @@ public class RepositorioVoos {
     }//fecha metodo
     
     public boolean verificaDataVoos(String data){
-        DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataX = LocalDate.parse(data,formatadorData);
-        int soma;     
-        
-        for(Voo voo : voos) { 
-            Period periodo = Period.between(voo.getDataVoo(), dataX);
-            soma = (periodo.getYears() + periodo.getMonths() + periodo.getDays());
-        
-        if(soma <= -1 || soma >= 1){
-                return true;
+        for(Voo voo : voos) {        
+            if(verifica.retornaPeriodoEmDias(voo.getDataVoo(), verifica.transformaData(data))<= -1 
+            || verifica.retornaPeriodoEmDias(voo.getDataVoo(), verifica.transformaData(data)) >= 1){
+                     return true;
             }//fecha if
             
         }//fecha for-each
         return false;
     }//fecha metodo
     
+    public boolean verificaAviaoData(String data, Aviao aviao){
+            LocalDate dataX = verifica.transformaData(data);
+            for(Voo voo : voos){
+                    if(dataX.equals(voo.getDataVoo()) && voo.getAviao() == aviao){
+                            return true;
+                }//fecha if
+            }//fecha-for-each
+        return false;
+    }//fecha metodo
+    
+    public Voo retornaVoo(Aviao aviao){
+        for(Voo voo : voos){
+            if(voo.getAviao() == aviao){
+                return voo;
+            }//fecha if
+           }//fecha for
+        //RETORNO CRIADO APENAS PARA PODER RETORNAR O OBJETO VOO
+        //CODIGO NAO DEVE CHEGAR NESTE RETORNO
+        
+            Voo voo = null;
+        return voo;
+    }//fecha classe
 }//fecha classe

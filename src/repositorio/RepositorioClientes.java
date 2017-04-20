@@ -3,6 +3,7 @@ package repositorio;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.Aviao;
 import model.Cliente;
 
 /**
@@ -69,5 +70,18 @@ public class RepositorioClientes {
         return false;
       
     }//fecha searchCliente
+    
+    public Cliente retornaCliente(String rg){
+        for(Cliente cliente : clientes){
+            if(cliente.getRg().equals(rg)){
+                return cliente;
+            }//fecha if
+           }//fecha for
+        //RETORNO CRIADO APENAS PARA PODER RETORNAR O OBJETO CLIENTE
+        //CODIGO NAO DEVE CHEGAR NESTE RETORNO
+        
+            Cliente cliente = null;
+        return cliente;
+    }//fecha classe
 }//fecha classe
 

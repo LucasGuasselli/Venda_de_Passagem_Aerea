@@ -18,15 +18,15 @@ import util.Digita;
  */
 public class AviaoUI {
     private Digita d = new Digita();
+    //METODO DE CADASTRO DE AVIAO
+    //@param ArrayList do tipo RepositorioAvioes
 
     public void cadAviao(RepositorioAvioes lista){
         //variaveis locais
             int limit = 30;
             String nome = "";
-        do{
-            nome = d.Digita("\n(min 3 e max 30 caracteres)\nDigite o nome do Aviao: ");
-        }while(nome.length() > limit || nome.length() <= 3);
        
+            nome = d.digitaNome("\n(min 3 e max 30 caracteres)\nDigite o nome do Aviao: ");       
         
             if(lista.AviaoExistByName(nome)){
                 System.out.println("Aviao ja esta cadastrado");
@@ -37,19 +37,20 @@ public class AviaoUI {
                 limit = 200;
                 
                     do{
-                      assentos = Integer.parseInt(d.Digita("\n(min 80 e max 200 assentos)"
+                      assentos = Integer.parseInt(d.digita("\n(min 80 e max 200 assentos)"
                               + "\nDigite a quantidade de assentos do Aviao: "));                    
                     }while(assentos > limit || assentos <= 79);
                 try{
                   lista.addAviao(new Aviao(nome, assentos));
-                    System.out.println("aVIAO CADASTRADO COM SUCESSO!!!");
+                    System.out.println("AVIAO CADASTRADO COM SUCESSO!!!");
             } catch (Exception e){
                     System.out.println("ERRO ao cadastrar aviao");
               }//try-catch
             }//if-else
             
     }//fecha cadCliente
-    
+    //METODO QUE MOSTRA TODOS AVIOES 
+    //@param ArrayList RepositorioAvioes
     public void showAvioes(RepositorioAvioes lista){
  
         if(lista.getListAvioes().size() <=0){
@@ -71,10 +72,11 @@ public class AviaoUI {
         }//fechaif-else     
            
     }//fecha metodo
-    
+    //METODO QUE VERIFICA SE UM AVIAO ESTA CADASTRADO
+    //@param ArrayList o tipo RepositorioAvioes
     public void searchAviao(RepositorioAvioes lista){
         if(lista.getListAvioes().size() > 0){  
-            int codigo = Integer.parseInt(d.Digita("Informe o Codigo do aviao: "));
+            int codigo = Integer.parseInt(d.digita("Informe o Codigo do aviao: "));
                 if(lista.searchAviaoByCodigo(codigo) == false){
                    System.out.println("Aviao nao cadastrado!!!!");
                 }//fecha if

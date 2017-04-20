@@ -5,11 +5,9 @@
  */
 package view;
 
-import java.time.LocalDate;
 import model.Aviao;
 import model.Voo;
 import repositorio.RepositorioAvioes;
-import repositorio.RepositorioClientes;
 import repositorio.RepositorioVoos;
 import util.Digita;
 import util.VerificaDatas;
@@ -26,35 +24,33 @@ public class VooUI {
     private Digita d = new Digita();
     private VerificaDatas verifica = new VerificaDatas();
     
+    /*METODO QUE CADASTRA VOO
+    * @param ArrayList RepositorioVoos
+    * @param ArrayList RepositorioAvioes
+    */
     public void cadVoo(RepositorioVoos listaVoos, RepositorioAvioes listaAvioes){
              //variaveis locais
         if(listaAvioes.getListAvioes().size() > 0){
-            LocalDate dataHoje = LocalDate.now();
             int limit = 30;
             String origem = "";
             String destino = "";
             String dataVoo = "";
             Aviao aviao = null;
             int codigoAviao = 0;
-        do{
-            origem = d.Digita("\n(min 3 e max 30 digitos)\nDigite o origem do voo: ");
-        }while(origem.length() > limit || origem.length() <= 3);
+    
+            origem = d.digitaNome("\n(min 3 e max 30 digitos)\nDigite o origem do voo: ");
         
-        do{
-            destino = d.Digita("\n(min 3 e max 30 digitos)\nDigite o destino do voo: ");
-        }while(destino.length() > limit || destino.length() <= 3);
-        
-        
-        
+            destino = d.digitaNome("\n(min 3 e max 30 digitos)\nDigite o destino do voo: ");
+                 
         do{
             do{
-                dataVoo = d.Digita("\nDigite a data do voo no formato (dd/mm/aaaa):");
+                dataVoo = d.digitaData("\nDigite a data do voo no formato (dd/mm/aaaa):");
                     if(verifica.verificaDataAnterior(dataVoo) == true){
                         System.out.println("\nDigite uma data igual ou a partir da data atual");
                     }//fecha if
         }while(dataVoo.length() != 10 || verifica.verificaDataAnterior(dataVoo) == true);
             
-            codigoAviao = Integer.parseInt(d.Digita("\nInforme o codigo do aviao:"));
+            codigoAviao = Integer.parseInt(d.digita("\nInforme o codigo do aviao:"));
          
         if(listaAvioes.AviaoExistByCod(codigoAviao) == true){
             if(listaVoos.verificaAviao(listaAvioes.retornaAviao(codigoAviao)) == false
@@ -69,7 +65,7 @@ public class VooUI {
         }while(aviao == null);
                
         try{
-              listaVoos.addVoo(new Voo(origem, destino, dataVoo, aviao));
+              listaVoos.addVoo(new Voo(origem, destino, dataVoo, aviao, aviao.getQtdeAssentos()));
                     System.out.println("VOO CADASTRADO COM SUCESSO!!!");
             } catch (Exception e){
                     System.out.println("ERRO ao cadastrar voo");
@@ -82,7 +78,9 @@ public class VooUI {
     
     }//fecha cadVoo
     
-    
+    //METODO QUE MOSTRA OS VOOS CADASTRADOS
+    //@param ArrayList RepositorioVoos
+
     public void showVoos(RepositorioVoos listaVoos){
  
         if(listaVoos.getListVoos().size() <=0){
@@ -108,10 +106,13 @@ public class VooUI {
             }//fechaif-else     
            
     }//fecha metodo
-       
+     /*METODO QUE VERIFICA SE UM VOO ESTA CADASTRADO
+    *@param ArrayList o tipo RepositorioVoos
+    *@param ArrayList o tipo RepositorioAvioes
+    */
    public void searchVoo(RepositorioVoos listaVoo,RepositorioAvioes listaAvioes){
         if(listaVoo.getListVoos().size() > 0){
-            int codigoAviao = Integer.parseInt(d.Digita("Informe o codigo do aviao: "));
+            int codigoAviao = Integer.parseInt(d.digita("Informe o codigo do aviao: "));
                 if(listaAvioes.AviaoExistByCod(codigoAviao) == false){
                     System.out.println("Aviao nao cadastrado!!!!");
                 }else{
@@ -121,4 +122,32 @@ public class VooUI {
             System.out.println("NAO EXISTEM VOOS CADASTRADOS");
         }//fecha if-else
     }//fecha metodo search
+    
+    /*METODO QUE VERIFICA MOSTRA TODOS OS ASSENTOS DO VOO
+    *@param ArrayList o tipo RepositorioVoos
+    *@param ArrayList o tipo RepositorioAvioes
+    */
+    public void verAssentos(RepositorioVoos listaVoos,RepositorioAvioes listaAvioes) {
+        int codigoAviao;
+        String dataVoo;
+        Voo voo = null;
+         do{
+            codigoAviao = Integer.parseInt(d.digita("\nInforme o codigo do aviao:"));
+            dataVoo = d.digita("Informe a data do voo: ");
+             
+                if(listaAvioes.AviaoExistByCod(codigoAviao) == true){
+                    if(listaVoos.verificaAviaoData(dataVoo,listaAvioes.retornaAviao(codigoAviao)) == true){
+                        voo = listaVoos.retornaVoo(listaAvioes.retornaAviao(codigoAviao));
+                    }else{
+                        System.out.println("Aviao nao possui voo para esta data!"); 
+                    }                                           
+                }else{
+                    System.out.println("AVIAO NAO EXISTE");
+                }
+               }while(voo == null);
+         voo.toString();
+         voo.mostraAssentos();
+    
+    }//fecha metodo
+    
 }//fecha classe

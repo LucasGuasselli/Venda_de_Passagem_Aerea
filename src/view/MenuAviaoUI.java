@@ -42,7 +42,8 @@ public class MenuAviaoUI  {
     
     
     public void menuAviao(){ 
-            do{
+        try{   
+        do{
                  //mostra opcoes adicionadas no menu
                 menu.show();
                 opcao = menu.getOption();
@@ -64,7 +65,9 @@ public class MenuAviaoUI  {
                         break;
             }//fecha switch-case            
         }while(opcao != 0);
-            
+            }catch (Exception e){
+                System.out.println("USO SOMENTE DE NUMEROS INTEIROS PARA NAVEGAR NOS MENUS!");
+            }//FECHA TRY-CATCH
         }//fecha metodo menuaVIAO    
     
     

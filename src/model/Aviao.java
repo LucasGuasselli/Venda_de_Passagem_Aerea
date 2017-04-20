@@ -61,7 +61,8 @@ public class Aviao {
     private int increment(){
         return (codigo_autoIncrement++);
     }
-     @Override
+     
+    @Override
     public String toString(){
         return  (String.format("%-10s", "CODIGO DO AVIAO") + "\t"
                    + String.format("%-20s", "|NOME DO AVIAO") + "\t"
@@ -69,10 +70,6 @@ public class Aviao {
               + "\n" + ((String.format("%-10s", getCodigo()) + "\t"
                         + String.format("%-20s", "|" + getNome()) + "\t"
                          + String.format("%-15s", "|" + getQtdeAssentos()))) + "\n";
-               /* "Codigo do aviao: " + getCodigo()
-               + "\nNome do aviao: " + getNome()
-               + "\nQuantidade de assentos do aviao: " + getQtdeAssentos() + "\n";
-               */
-    }//fecha toString
+        }//fecha toString
  
 }//fecha aviao

@@ -9,6 +9,7 @@ import repositorio.RepositorioAvioes;
 import util.Opcao;
 import util.Menu;
 import repositorio.RepositorioClientes;
+import repositorio.RepositorioVendas;
 import repositorio.RepositorioVoos;
 /**
  *
@@ -24,6 +25,7 @@ public class MenuUI {
     private RepositorioClientes listaClientes; 
     private RepositorioAvioes listaAvioes;
     private RepositorioVoos listaVoos;
+    private RepositorioVendas listaVendas;
     private int opcao;
     
     //construtor
@@ -31,6 +33,7 @@ public class MenuUI {
             listaClientes = new RepositorioClientes();  
             listaAvioes = new RepositorioAvioes();
             listaVoos = new RepositorioVoos();
+            listaVendas = new RepositorioVendas();
     }//fecha construtor     
     
     public void executar(){      
@@ -38,18 +41,22 @@ public class MenuUI {
         MenuClienteUI menuCliUI = new MenuClienteUI(listaClientes);
         MenuAviaoUI menuAviUI = new MenuAviaoUI(listaAvioes);
         MenuVooUI menuVooUI = new MenuVooUI(listaVoos, listaAvioes);
-        
+        MenuVendaUI menuVendaUI = new MenuVendaUI(listaVendas,listaClientes,listaAvioes, listaVoos);
+
 
         //criando opcoes
         Opcao menuCliente = new Opcao("Acessar o menu de cliente");
         Opcao menuAviao = new Opcao("Acessar o menu de avioes");
         Opcao menuVoo = new Opcao("Acessar o menu de voos");
+        Opcao menuVenda = new Opcao("Acessar o menu de vendas");
+
         Opcao sair = new Opcao("Sair");
         
         Menu menu = new Menu();
         menu.addOption(menuCliente);
         menu.addOption(menuAviao);
-         menu.addOption(menuVoo);
+        menu.addOption(menuVoo);
+        menu.addOption(menuVenda);
         menu.addOption(sair);
         
         try{
@@ -67,6 +74,9 @@ public class MenuUI {
                 case 3:
                         menuVooUI.menuVoo();
                     break;
+                case 4:
+                        menuVendaUI.menuVenda();
+                    break;
                 case 0:
                     System.out.println("###################################");   
                     System.out.println("Aplicacao finalizada!!!");
@@ -78,7 +88,7 @@ public class MenuUI {
             
         }while(opcao != 0);
             }catch (Exception e){
-                System.out.println("USO SOMENTE DE NUMEROS INTEIROS PARA NAVEGAR NO MENU!");
+                System.out.println("USO SOMENTE DE NUMEROS INTEIROS PARA NAVEGAR NOS MENUS!");
             }//fecha try-catch
     
     }//fecha executar

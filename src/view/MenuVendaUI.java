@@ -5,43 +5,48 @@
  */
 package view;
 
+import repositorio.RepositorioAvioes;
 import repositorio.RepositorioClientes;
+import repositorio.RepositorioVendas;
+import repositorio.RepositorioVoos;
 import util.Menu;
 import util.Opcao;
 
 /**
  *
  * @author Lucas Guasselli de Moraes
- * @version 1.3
- * @since 13/04/2017
+ * @version 1.5
+ * @since 19/04/2017
  * 
  */
-public class MenuClienteUI {
-    
-      
-        Opcao cadCli = new Opcao("Cadastrar cliente");
-        Opcao verCli = new Opcao("Vizualizar clientes");
-        Opcao pesquisaCliRg = new Opcao("Pesquisa cliente pelo RG");
+public class MenuVendaUI {
+        Opcao cadVenda = new Opcao("Realizar venda");
+        Opcao verVenda = new Opcao("Visualizar passageiros e seus assentos reservados");
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
         Menu menu = new Menu();
-       
-       
-        private RepositorioClientes lista;
+               
+        private RepositorioVendas listaVendas;      
+        private RepositorioVoos listaVoos;
+        private RepositorioClientes listaClientes;
+        private RepositorioAvioes listaAvioes;
+
         int opcao;
         
-        ClienteUI cliUI = new ClienteUI();
+        VendaUI vendaUI = new VendaUI();
         
         //construtor
-        public MenuClienteUI(RepositorioClientes lista) {
-           this.lista = lista;
-           menu.addOption(cadCli);
-           menu.addOption(verCli);
-           menu.addOption(pesquisaCliRg);
+        public MenuVendaUI(RepositorioVendas listaVendas, RepositorioClientes listaClientes,RepositorioAvioes listaAvioes, RepositorioVoos listaVoos) {
+          this.listaVendas = listaVendas;
+          this.listaClientes = listaClientes;
+          this.listaAvioes = listaAvioes;
+          this.listaVoos = listaVoos;
+           menu.addOption(cadVenda);
+           menu.addOption(verVenda);
            menu.addOption(menuPrincipal);
         }//fecha construtor
         
-        public void menuCliente(){
+        public void menuVenda(){
             try{
             do{
                  //mostra opcoes adicionadas no menu
@@ -49,14 +54,10 @@ public class MenuClienteUI {
                 opcao = menu.getOption();
                  switch(opcao){
                     case 1:
-                        cliUI.cadCliente(lista);
+                        vendaUI.cadVenda(listaVendas,listaClientes,listaAvioes, listaVoos);
                         break;
                     case 2:
-                        cliUI.showClientes(lista);
-                        break;
-                    case 3:
-                        cliUI.searchCliente(lista);
-                        break;
+                        vendaUI.verVenda(listaVendas);
                     case 0:
                         System.out.println("Retornando ao menu principal");
                         break;

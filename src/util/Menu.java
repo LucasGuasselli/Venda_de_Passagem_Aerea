@@ -37,7 +37,7 @@ public class Menu {
 	}//fecha show
 
 	public int getOption() {
-		int opcao = Integer.parseInt(d.Digita(""));
+		int opcao = Integer.parseInt(d.digita(""));
 		return opcao;		
 	}//fecha getOption
 

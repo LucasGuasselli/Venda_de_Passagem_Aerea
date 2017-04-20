@@ -8,6 +8,7 @@ package util;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import model.Voo;
 
 /**
  *
@@ -40,4 +41,14 @@ public class VerificaDatas {
             return false;
     }//fecha metodo
     
+    public int retornaPeriodoEmDias(LocalDate data1, LocalDate data2){
+        Period periodo = Period.between(data1, data2);
+        int soma = (periodo.getYears() + periodo.getMonths() + periodo.getDays());
+            return soma;
+    }//fecha metodo
+   
+    public LocalDate transformaData(String data){
+        LocalDate novaData = LocalDate.parse(data, formatadorData);
+            return novaData;
+    }//fecha metodo
 }//fecha classe
