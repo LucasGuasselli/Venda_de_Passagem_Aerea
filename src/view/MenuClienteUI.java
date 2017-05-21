@@ -20,8 +20,10 @@ public class MenuClienteUI {
     
       
         Opcao cadCli = new Opcao("Cadastrar cliente");
-        Opcao verCli = new Opcao("Vizualizar clientes");
+        Opcao edtCli = new Opcao("Editar clientes");
+        Opcao delCli = new Opcao("Deletar clientes");
         Opcao pesquisaCliRg = new Opcao("Pesquisa cliente pelo RG");
+        Opcao verCli = new Opcao("Vizualizar clientes");       
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
         Menu menu = new Menu();
@@ -36,8 +38,10 @@ public class MenuClienteUI {
         public MenuClienteUI(RepositorioClientes lista) {
            this.lista = lista;
            menu.addOption(cadCli);
-           menu.addOption(verCli);
+           menu.addOption(edtCli);
+           menu.addOption(delCli);
            menu.addOption(pesquisaCliRg);
+           menu.addOption(verCli);
            menu.addOption(menuPrincipal);
         }//fecha construtor
         
@@ -49,13 +53,13 @@ public class MenuClienteUI {
                 opcao = menu.getOption();
                  switch(opcao){
                     case 1:
-                        cliUI.cadCliente(lista);
+                        cliUI.cadCliente();
                         break;
                     case 2:
-                        cliUI.showClientes(lista);
+                        cliUI.editaCliente();
                         break;
                     case 3:
-                        cliUI.searchCliente(lista);
+                        
                         break;
                     case 0:
                         System.out.println("Retornando ao menu principal");

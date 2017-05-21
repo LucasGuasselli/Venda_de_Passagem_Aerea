@@ -16,6 +16,8 @@ public class Cliente {
     
     //atributos
     private static int codigo_autoIncrement = 1;
+
+    
     private int id;
     private String nome;
     private String rg;
@@ -25,6 +27,14 @@ public class Cliente {
     
     public Cliente(String nome,String rg, String telefone){
         this.id = increment();
+        this.nome = nome;
+        this.rg = rg;
+        this.telefone = telefone;
+        
+    }//fecha construtor
+    
+    public Cliente(int id, String nome,String rg, String telefone){
+        this.id = id;
         this.nome = nome;
         this.rg = rg;
         this.telefone = telefone;
@@ -44,6 +54,9 @@ public class Cliente {
     public void setTelefone(String telefone){
         this.telefone = telefone;
     }
+    public void setId(int id) {
+        this.id = id;
+    }
     
     //TERMINAR SETS
     
@@ -56,6 +69,10 @@ public class Cliente {
     public String getTelefone(){
         return this.telefone;
     }
+    public int getId() {
+        return id;
+    }
+
      //TERMINA GETS
     private int increment(){
         return (codigo_autoIncrement++);

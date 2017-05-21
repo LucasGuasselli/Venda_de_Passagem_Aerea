@@ -6,6 +6,7 @@
 package view;
 
 import DAO.ClienteDAO;
+import java.sql.SQLException;
 import model.Cliente;
 import repositorio.RepositorioClientes;
 import util.Digita;
@@ -22,7 +23,7 @@ public class ClienteUI {
     private Digita d = new Digita();
     //METODO DE CADASTRO DE AVIAO
     //@param ArrayList do tipo RepositorioClientes
-    public void cadCliente(RepositorioClientes lista){
+    public void cadCliente(){
         //variaveis locais
      
             int limit = 10;
@@ -30,9 +31,9 @@ public class ClienteUI {
         
             rg = d.digitaRg("\n(min 4 e max 10 digitos)\nDigite o rg do Cliente: ");
                
-            if(lista.clienteExist(rg)){
-                System.out.println("Cliente ja esta cadastrado");
-            }else{
+           // if(lista.clienteExist(rg)){
+            //    System.out.println("Cliente ja esta cadastrado");
+         
                //variaveis locais
                 String nome = d.digitaNome("\nDigite o nome do Cliente: ");
                 String telefone = "(00)00000-0000";
@@ -50,7 +51,39 @@ public class ClienteUI {
               }//try-catch
             }//if-else
             
-    }//fecha cadCliente
+    
+    
+    public void editaCliente() throws SQLException, ClassNotFoundException{
+         //variaveis locais
+     
+            int limit = 10;
+            String rg = "0000000000";
+            Cliente cli;
+            rg = d.digitaRg("\n(min 4 e max 10 digitos)\nDigite o rg do Cliente que deseja alterar: ");
+            
+            cli = (cDAO.procurarPorRg(rg));
+           // if(lista.clienteExist(rg)){
+            //    System.out.println("Cliente ja esta cadastrado");
+         
+               //variaveis locais
+                String nome = d.digitaNome("\nDigite o nome do Cliente: ");
+                String telefone = "(00)00000-0000";
+                limit = 14;
+                
+                    do{
+                      telefone = d.digita("\n(min 8 e max 14 digitos)\nDigite "
+                            + "o telefone do Cliente: ");                    
+                    }while(telefone.length() > limit || telefone.length() <= 7);
+                try{
+                  cDAO.editarCliente(new Cliente(cli.getId(),nome, rg, telefone)); 
+                    System.out.println("CLIENTE EDITADO COM SUCESSO!!!");
+            } catch (Exception e){
+                    System.out.println("ERRO ao cadastrar cliente");
+              }//try-catch
+            
+        
+    }//fecha editaCliente
+    
     //METODO QUE MOSTRA TODOS CLIENTES CADASTRADOS
     //@param ArrayList do tipo RepositorioClientes
     public void showClientes(RepositorioClientes lista){
@@ -86,4 +119,6 @@ public class ClienteUI {
             System.out.println("NAO EXISTEM CLIENTES CADASTRADOS");
         }//fecha-if-else
     }//fecha metodo search
+
+    
 }//fecha classe
