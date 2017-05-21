@@ -5,6 +5,7 @@
  */
 package view;
 
+import DAO.ClienteDAO;
 import model.Cliente;
 import repositorio.RepositorioClientes;
 import util.Digita;
@@ -17,7 +18,7 @@ import util.Digita;
  * 
  */
 public class ClienteUI {
-    
+    ClienteDAO cDAO = new ClienteDAO();
     private Digita d = new Digita();
     //METODO DE CADASTRO DE AVIAO
     //@param ArrayList do tipo RepositorioClientes
@@ -42,7 +43,7 @@ public class ClienteUI {
                             + "o telefone do Cliente: ");                    
                     }while(telefone.length() > limit || telefone.length() <= 7);
                 try{
-                  lista.addCliente(new Cliente(nome, rg, telefone)); 
+                  cDAO.cadastrarCliente(new Cliente(nome, rg, telefone)); 
                     System.out.println("CLIENTE CADASTRADO COM SUCESSO!!!");
             } catch (Exception e){
                     System.out.println("ERRO ao cadastrar cliente");

@@ -15,6 +15,8 @@ package model;
 public class Cliente {
     
     //atributos
+    private static int codigo_autoIncrement = 1;
+    private int id;
     private String nome;
     private String rg;
     private String telefone;
@@ -22,6 +24,7 @@ public class Cliente {
     //construtor
     
     public Cliente(String nome,String rg, String telefone){
+        this.id = increment();
         this.nome = nome;
         this.rg = rg;
         this.telefone = telefone;
@@ -54,6 +57,9 @@ public class Cliente {
         return this.telefone;
     }
      //TERMINA GETS
+    private int increment(){
+        return (codigo_autoIncrement++);
+    }//fecha increment
     
     @Override
     public String toString(){
@@ -64,4 +70,8 @@ public class Cliente {
                         + String.format("%-20s", "|" + getNome()) + "\t"
                          + String.format("%-15s", "|" + getTelefone()))) + "\n";
         }//fecha toString
+
+    public int getIdade() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }//fecha classe
