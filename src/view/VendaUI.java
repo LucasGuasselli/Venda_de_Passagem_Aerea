@@ -43,7 +43,7 @@ public class VendaUI {
             int codigoAviao = 0;
         
             System.out.println("\nClientes cadastrados:\n");
-            cliUI.showClientes(listaClientes);
+           // cliUI.showClientes(listaClientes);
             System.out.println("\nVoos cadastrados:\n");
             vooUI.showVoos(listaVoos);
             

@@ -88,7 +88,4 @@ public class Cliente {
                          + String.format("%-15s", "|" + getTelefone()))) + "\n";
         }//fecha toString
 
-    public int getIdade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }//fecha classe

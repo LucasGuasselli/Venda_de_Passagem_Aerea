@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.Cliente;
 import persistencia.ConnectionFactory;
 
@@ -33,7 +35,7 @@ public class ClienteDAO {
         
         //CADASTRANDO Cliente
         
-            try{   
+        try{   
             String sql = "insert into cliente(nome, rg, telefone) values (?, ?, ?)";
                conectar(sql);
                     comando.setString(1,cliente.getNome());
@@ -43,9 +45,9 @@ public class ClienteDAO {
                  if(comando.executeUpdate()>0){
                      System.out.println("Cadastro realizado com sucesso!");
                  }//fecha if
-            }catch (SQLException e) {
+        }catch (SQLException e) {
                  throw new SQLException("Erro ao cadastrar cliente!");
-            } finally {
+        } finally {
             conexao.close();
             comando.close();
         }//fecha finally
@@ -60,16 +62,16 @@ public class ClienteDAO {
                     + "WHERE id=?";
 
             conectar(sql);
-            comando.setString(1, cliente.getRg());
-            comando.setString(2, cliente.getNome());
+            comando.setString(1, cliente.getNome());
+            comando.setString(2, cliente.getRg());
             //Trabalhando com data: convertendo LocalDate -> Date
             //Date dataSql = Date.valueOf(paciente.getDataNascimento());
             comando.setString(3, cliente.getTelefone());
             comando.setInt(4, cliente.getId());
             comando.executeUpdate();      
-            }catch (SQLException e) {
-                 throw new SQLException("Erro ao editar produto!");
-            } finally {
+        }catch (SQLException e) {
+                 throw new SQLException("Erro ao editar cliente!");
+        } finally {
             conexao.close();
             comando.close();
         }//fecha finally
@@ -77,7 +79,7 @@ public class ClienteDAO {
      
      public Cliente procurarPorRg(String _rg) throws SQLException, ClassNotFoundException {
         
-         try{
+        try{
             String sql = "SELECT * FROM cliente WHERE rg = ?";
       
             conectar(sql);
@@ -98,14 +100,95 @@ public class ClienteDAO {
 
                 return cli;
             }//fecha if
-             }catch (SQLException e) {
+        }catch (SQLException e) {
                  throw new SQLException("Erro ao procurar cliente!");
-            } finally {
+        } finally {
             conexao.close();
             comando.close();
-            }//fecha finally
+        }//fecha finally
                 return (null);
     }//fecha procurarPorRg
      
+    public List<Cliente> listarPorNome(String _nome) throws ClassNotFoundException, SQLException {
+        List<Cliente> listaClientes = new ArrayList<>();
+        String sql = "SELECT * FROM cliente WHERE cliente.nome LIKE ?";
+
+        try {
+            conectar(sql);
+            comando.setString(1, "%" + _nome + "%");
+            ResultSet resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nome = resultado.getString("nome");
+                String rg = resultado.getString("rg");
+                String telefone = resultado.getString("telefone");               
+
+                Cliente cli = new Cliente(id, rg, nome, telefone);
+                    listaClientes.add(cli);
+                    
+            }//fecha while
+            return listaClientes;
+        }catch (SQLException e) {
+                 throw new SQLException("Erro ao procurar cliente!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+    }//fecha metodo listarPorNome
+    
+    public Cliente procurarPorId(int _id)throws SQLException, ClassNotFoundException {
+       
+        try{
+            String sql = "SELECT * FROM cliente WHERE id = ?";
+                   comando.setInt(1,_id);
+            ResultSet resultado = comando.executeQuery(sql);
+
+            if (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nome = resultado.getString("nome");
+                String rg = resultado.getString("rg");
+                String telefone = resultado.getString("telefone");
+                
+                Cliente cli = new Cliente(id, nome, rg, telefone);
+
+                return cli;
+
+            }//terminar caminho feliz (IF)
+        }catch (SQLException e) {
+                 throw new SQLException("Erro ao procurar cliente!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+        
+        return (null);
+    }//fecha metodo procurarPorId
+     
+    public void deletarCliete(Cliente cliente) throws SQLException, ClassNotFoundException{
+        
+        //DELETANDO PESSOA 
+        try{
+                String sql = "delete from cliente where id = ?";
+                    conectar(sql); 
+                    
+                comando.setInt(1,cliente.getId());
+                 if(comando.executeUpdate()>0){
+                     System.out.println("Pessoa deletada com sucesso!");
+                 }//fecha if
+        }catch (SQLException e) {
+                 throw new SQLException("Erro ao deletar cliente!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+            
+    }//fecha deletarCliente
+
      
 }//fecha classe
+
+
+
+        
+            

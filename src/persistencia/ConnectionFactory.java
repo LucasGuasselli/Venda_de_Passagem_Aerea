@@ -17,7 +17,7 @@ public class ConnectionFactory {
    
         private static String url = "jdbc:postgresql://localhost:5432/postgres";
         private static String usuario = "postgres";
-        private static String senha = "123456";
+        private static String senha = "@Zackk0265";
         
         public ConnectionFactory(){
         
@@ -33,7 +33,7 @@ public class ConnectionFactory {
             if(conexao == null){
                 System.out.println("Fala na conexao!");
             }else{
-                System.out.println("Conectado com sucesso!");
+                //System.out.println("Conectado com sucesso!");
             }//fecha -if-else
             
             //conexao.close();

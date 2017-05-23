@@ -23,6 +23,7 @@ public class MenuClienteUI {
         Opcao edtCli = new Opcao("Editar clientes");
         Opcao delCli = new Opcao("Deletar clientes");
         Opcao pesquisaCliRg = new Opcao("Pesquisa cliente pelo RG");
+        Opcao pesquisaCliNome = new Opcao("Pesquisa cliente pelo NOME");
         Opcao verCli = new Opcao("Vizualizar clientes");       
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
@@ -41,6 +42,7 @@ public class MenuClienteUI {
            menu.addOption(edtCli);
            menu.addOption(delCli);
            menu.addOption(pesquisaCliRg);
+           menu.addOption(pesquisaCliNome);
            menu.addOption(verCli);
            menu.addOption(menuPrincipal);
         }//fecha construtor
@@ -59,7 +61,16 @@ public class MenuClienteUI {
                         cliUI.editaCliente();
                         break;
                     case 3:
-                        
+                        cliUI.deletaCliente();
+                        break;
+                     case 4:
+                        cliUI.procurarPorRg();
+                        break;
+                    case 5:
+                        cliUI.procurarClientesPorNome();
+                        break;
+                    case 6:
+
                         break;
                     case 0:
                         System.out.println("Retornando ao menu principal");
