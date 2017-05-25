@@ -37,8 +37,10 @@ public class Digita {
         int limit = 30;            
             do{
                 System.out.print(texto);
-                 nome = ler.nextLine();                         
-            }while(nome.length() > limit || nome.length() <= 3);
+                   nome = ler.nextLine();                         
+            }while(nome.length() > limit || nome.length() == 0);
+                    nome = nome.toLowerCase();
+                    nome = nome.substring(0,1).toUpperCase().concat(nome.substring(1));
                 return nome;   
     }//fecha metodo
 

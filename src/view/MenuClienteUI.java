@@ -24,7 +24,7 @@ public class MenuClienteUI {
         Opcao delCli = new Opcao("Deletar clientes");
         Opcao pesquisaCliRg = new Opcao("Pesquisa cliente pelo RG");
         Opcao pesquisaCliNome = new Opcao("Pesquisa cliente pelo NOME");
-        Opcao verCli = new Opcao("Vizualizar clientes");       
+        Opcao verCli = new Opcao("Vizualizar todos clientes");       
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
         Menu menu = new Menu();
@@ -70,7 +70,7 @@ public class MenuClienteUI {
                         cliUI.procurarClientesPorNome();
                         break;
                     case 6:
-
+                        cliUI.visualizarClientes();
                         break;
                     case 0:
                         System.out.println("Retornando ao menu principal");

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import java.sql.Connection;
@@ -14,11 +10,14 @@ import java.util.List;
 import model.Cliente;
 import persistencia.ConnectionFactory;
 
-
 /**
  *
- * @author 631520359
+ * @author Lucas Guasselli de Moraes
+ * @version 1.6
+ * @since 20/05/2017
+ * 
  */
+
 public class ClienteDAO {
     
     private Connection conexao;
@@ -43,10 +42,10 @@ public class ClienteDAO {
                     comando.setString(3,cliente.getTelefone());
                     
                  if(comando.executeUpdate()>0){
-                     System.out.println("Cadastro realizado com sucesso!");
+                     System.out.println("\nCadastro realizado com sucesso!");
                  }//fecha if
         }catch (SQLException e) {
-                 throw new SQLException("Erro ao cadastrar cliente!");
+                 throw new SQLException("\nErro ao cadastrar cliente!");
         } finally {
             conexao.close();
             comando.close();
@@ -70,7 +69,7 @@ public class ClienteDAO {
             comando.setInt(4, cliente.getId());
             comando.executeUpdate();      
         }catch (SQLException e) {
-                 throw new SQLException("Erro ao editar cliente!");
+                 throw new SQLException("\nErro ao editar cliente!");
         } finally {
             conexao.close();
             comando.close();
@@ -101,7 +100,7 @@ public class ClienteDAO {
                 return cli;
             }//fecha if
         }catch (SQLException e) {
-                 throw new SQLException("Erro ao procurar cliente!");
+                 throw new SQLException("\nErro ao procurar cliente!");
         } finally {
             conexao.close();
             comando.close();
@@ -130,7 +129,7 @@ public class ClienteDAO {
             }//fecha while
             return listaClientes;
         }catch (SQLException e) {
-                 throw new SQLException("Erro ao procurar cliente!");
+                 throw new SQLException("\nErro ao procurar cliente!");
         } finally {
             conexao.close();
             comando.close();
@@ -156,7 +155,7 @@ public class ClienteDAO {
 
             }//terminar caminho feliz (IF)
         }catch (SQLException e) {
-                 throw new SQLException("Erro ao procurar cliente!");
+                 throw new SQLException("\nErro ao procurar cliente!");
         } finally {
             conexao.close();
             comando.close();
@@ -174,10 +173,10 @@ public class ClienteDAO {
                     
                 comando.setInt(1,cliente.getId());
                  if(comando.executeUpdate()>0){
-                     System.out.println("Pessoa deletada com sucesso!");
+                     System.out.println("\nCliente deletado com sucesso!");
                  }//fecha if
         }catch (SQLException e) {
-                 throw new SQLException("Erro ao deletar cliente!");
+                 throw new SQLException("\nErro ao deletar cliente!");
         } finally {
             conexao.close();
             comando.close();
@@ -185,6 +184,69 @@ public class ClienteDAO {
             
     }//fecha deletarCliente
 
+    public List<Cliente> listarClientes() throws ClassNotFoundException, SQLException {
+        List<Cliente> listaClientes = new ArrayList<>();
+        String sql = "SELECT * FROM cliente";
+
+        try {
+            conectar(sql);
+            ResultSet resultado = comando.executeQuery();
+
+            while (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nome = resultado.getString("nome");
+                String rg = resultado.getString("rg");
+                String telefone = resultado.getString("telefone");               
+
+                Cliente cli = new Cliente(id, rg, nome, telefone);
+                    listaClientes.add(cli);
+                    
+            }//fecha while
+            return listaClientes;
+        }catch (SQLException e) {
+                 throw new SQLException("\nErro ao procurar cliente!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+    
+    }//fecha listarClientes
+
+    public boolean verificaRg(String _rg) throws ClassNotFoundException, SQLException {
+        try{
+            String sql = "SELECT * FROM cliente WHERE rg = ?";      
+                conectar(sql);
+                comando.setString(1, _rg);
+            ResultSet resultado = comando.executeQuery();
+                if (resultado.next()) {                
+                    return true;
+                }//fecha if
+        }catch (SQLException e) {
+                throw new SQLException("\nErro ao verificar cliente!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+                return false;   
+    }//fecha verificaRG
+
+    public boolean verificaNome(String _nome) throws ClassNotFoundException, SQLException {
+        try{
+            String sql = "SELECT * FROM cliente WHERE nome = ?";      
+                conectar(sql);
+                comando.setString(1, "%" + _nome + "%");
+            ResultSet resultado = comando.executeQuery();
+                if (resultado.next()) {                
+                    return true;
+                }//fecha if
+        }catch (SQLException e) {
+                throw new SQLException("\nErro ao verificar cliente!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+                return false; 
+    }//fecha metodo verificaNome
      
 }//fecha classe
 
