@@ -15,9 +15,6 @@ package model;
 public class Cliente {
     
     //atributos
-    private static int codigo_autoIncrement = 1;
-
-    
     private int id;
     private String nome;
     private String rg;
@@ -26,11 +23,9 @@ public class Cliente {
     //construtor
     
     public Cliente(String nome,String rg, String telefone){
-        this.id = increment();
         this.nome = nome;
         this.rg = rg;
-        this.telefone = telefone;
-        
+        this.telefone = telefone;        
     }//fecha construtor
     
     public Cliente(int id, String nome,String rg, String telefone){
@@ -74,9 +69,10 @@ public class Cliente {
     }
 
      //TERMINA GETS
-    private int increment(){
+   /* private int increment(){
         return (codigo_autoIncrement++);
     }//fecha increment
+   */
     
     @Override
     public String toString(){

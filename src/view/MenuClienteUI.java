@@ -16,28 +16,22 @@ import util.Opcao;
  * @since 13/04/2017
  * 
  */
-public class MenuClienteUI {
-    
+public class MenuClienteUI {    
       
         Opcao cadCli = new Opcao("Cadastrar cliente");
-        Opcao edtCli = new Opcao("Editar clientes");
-        Opcao delCli = new Opcao("Deletar clientes");
+        Opcao edtCli = new Opcao("Editar cliente");
+        Opcao delCli = new Opcao("Deletar cliente");
         Opcao pesquisaCliRg = new Opcao("Pesquisa cliente pelo RG");
         Opcao pesquisaCliNome = new Opcao("Pesquisa cliente pelo NOME");
         Opcao verCli = new Opcao("Vizualizar todos clientes");       
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
-        Menu menu = new Menu();
-       
-       
-        private RepositorioClientes lista;
-        int opcao;
-        
+        Menu menu = new Menu();   
+        int opcao;        
         ClienteUI cliUI = new ClienteUI();
         
         //construtor
-        public MenuClienteUI(RepositorioClientes lista) {
-           this.lista = lista;
+        public MenuClienteUI() {
            menu.addOption(cadCli);
            menu.addOption(edtCli);
            menu.addOption(delCli);

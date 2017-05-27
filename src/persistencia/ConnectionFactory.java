@@ -21,8 +21,7 @@ public class ConnectionFactory {
         public ConnectionFactory(){
         
         }//fecha construtor
-    
-    
+        
     public static Connection getConnection() throws ClassNotFoundException, SQLException{
                Connection conexao = null;
 

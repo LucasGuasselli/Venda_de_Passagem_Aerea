@@ -15,26 +15,39 @@ import java.util.Scanner;
  * 
  */
 public class Digita {
-    Scanner ler = new Scanner(System.in);
+    int limit;
     
     public String digita(String texto){
+        Scanner ler = new Scanner(System.in);    
             System.out.print(texto);
                   return ler.nextLine();
             }//fecha Digita
     
     public String digitaRg(String texto){
+        Scanner ler = new Scanner(System.in);    
         String rg = "";
-        int limit = 10;            
+        limit = 10;            
             do{
                 System.out.print(texto);
                  rg = ler.nextLine();                         
             }while(rg.length() > limit || rg.length() <= 3);
                 return rg;
     }//fecha Digita
+    
+    public int digitaCodigo(String texto){
+        Scanner ler = new Scanner(System.in);    
+        int codigo;
+            do{
+                System.out.print(texto);
+                   codigo = ler.nextInt();                         
+            }while(codigo < 0 || codigo > 999);
+                return codigo;
+    }//fecha Digita
 
     public String digitaNome(String texto) {
+        Scanner ler = new Scanner(System.in);    
         String nome = "";
-        int limit = 30;            
+        limit = 30;            
             do{
                 System.out.print(texto);
                    nome = ler.nextLine();                         
@@ -45,19 +58,20 @@ public class Digita {
     }//fecha metodo
 
     public String digitaData(String texto) {
+        Scanner ler = new Scanner(System.in);    
         String data = "00/00/0000";
-        int limit = 10;            
+        limit = 10;            
             do{
                 System.out.print(texto);
                     data = ler.nextLine();                         
             }while(data.length() > limit || data.length() < limit);
-                return data;  
-    
+                return data;   
     }//fecha metodo
     
     public String digitaTelefone(String texto){
+        Scanner ler = new Scanner(System.in);    
         String telefone = "(00)00000-0000";
-        int limit = 14;            
+        limit = 14;            
             do{
                 System.out.print(texto);
                     telefone = ler.nextLine();                         

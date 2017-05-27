@@ -38,8 +38,8 @@ public class MenuUI {
     
     public void executar(){      
         
-        MenuClienteUI menuCliUI = new MenuClienteUI(listaClientes);
-        MenuAviaoUI menuAviUI = new MenuAviaoUI(listaAvioes);
+        MenuClienteUI menuCliUI = new MenuClienteUI();
+        MenuAviaoUI menuAviUI = new MenuAviaoUI();
         MenuVooUI menuVooUI = new MenuVooUI(listaVoos, listaAvioes);
         MenuVendaUI menuVendaUI = new MenuVendaUI(listaVendas,listaClientes,listaAvioes, listaVoos);
 

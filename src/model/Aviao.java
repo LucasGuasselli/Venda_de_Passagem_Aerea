@@ -15,14 +15,21 @@ package model;
 public class Aviao {
   
     //atributos
-    private static int codigo_autoIncrement = 1;
+    private int id;
     private int codigo;
     private String nome; 
     private int qtdeAssentos;
 
     //construtor
-    public Aviao(String nome, int qtdeAssentos) {
-        this.codigo = increment();
+    public Aviao(int codigo, String nome, int qtdeAssentos) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.qtdeAssentos = qtdeAssentos;
+    }//fecha construtor
+    
+    public Aviao(int id,int codigo,String nome, int qtdeAssentos) {
+        this.id = id;
+        this.codigo = codigo;
         this.nome = nome;
         this.qtdeAssentos = qtdeAssentos;
     }//fecha construtor
@@ -40,6 +47,9 @@ public class Aviao {
 
     public void setQtdeAssentos(int qtdeAssentos) {
         this.qtdeAssentos = qtdeAssentos;
+    }    
+    public void setId(int id) {
+        this.id = id;
     }
 
     //TERMINA SETS    
@@ -55,13 +65,16 @@ public class Aviao {
     public int getQtdeAssentos() {
         return qtdeAssentos;
     }
-    
+    public int getId() {
+        return id;
+    }
+
     //TERMINA GETS
-    
+   /* 
     private int increment(){
         return (codigo_autoIncrement++);
     }
-     
+   */  
     @Override
     public String toString(){
         return  (String.format("%-10s", "CODIGO DO AVIAO") + "\t"

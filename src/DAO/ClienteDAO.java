@@ -53,9 +53,8 @@ public class ClienteDAO {
    
             
     }//fecha cadastrarPessoa
-    
-    
-     public void editarCliente(Cliente cliente) throws SQLException, ClassNotFoundException{
+        
+    public void editarCliente(Cliente cliente) throws SQLException, ClassNotFoundException{
         try{
             String sql = "UPDATE cliente SET nome=?, rg=?, telefone=? "
                     + "WHERE id=?";
@@ -75,8 +74,28 @@ public class ClienteDAO {
             comando.close();
         }//fecha finally
     }//fecha editarCliente
-     
-     public Cliente procurarPorRg(String _rg) throws SQLException, ClassNotFoundException {
+    
+    public void deletarCliete(Cliente cliente) throws SQLException, ClassNotFoundException{
+        
+        //DELETANDO PESSOA 
+        try{
+                String sql = "delete from cliente where id = ?";
+                    conectar(sql); 
+                    
+                comando.setInt(1,cliente.getId());
+                 if(comando.executeUpdate()>0){
+                     System.out.println("\nCliente deletado com sucesso!");
+                 }//fecha if
+        }catch (SQLException e) {
+                 throw new SQLException("\nErro ao deletar cliente!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+            
+    }//fecha deletarCliente
+    
+    public Cliente procurarClientePorRg(String _rg) throws SQLException, ClassNotFoundException {
         
         try{
             String sql = "SELECT * FROM cliente WHERE rg = ?";
@@ -108,7 +127,7 @@ public class ClienteDAO {
                 return (null);
     }//fecha procurarPorRg
      
-    public List<Cliente> listarPorNome(String _nome) throws ClassNotFoundException, SQLException {
+    public List<Cliente> procurarClientePorNome(String _nome) throws ClassNotFoundException, SQLException {
         List<Cliente> listaClientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente WHERE cliente.nome LIKE ?";
 
@@ -136,8 +155,7 @@ public class ClienteDAO {
         }//fecha finally
     }//fecha metodo listarPorNome
     
-    public Cliente procurarPorId(int _id)throws SQLException, ClassNotFoundException {
-       
+    public Cliente procurarClientePorId(int _id)throws SQLException, ClassNotFoundException {
         try{
             String sql = "SELECT * FROM cliente WHERE id = ?";
                    comando.setInt(1,_id);
@@ -163,27 +181,7 @@ public class ClienteDAO {
         
         return (null);
     }//fecha metodo procurarPorId
-     
-    public void deletarCliete(Cliente cliente) throws SQLException, ClassNotFoundException{
-        
-        //DELETANDO PESSOA 
-        try{
-                String sql = "delete from cliente where id = ?";
-                    conectar(sql); 
-                    
-                comando.setInt(1,cliente.getId());
-                 if(comando.executeUpdate()>0){
-                     System.out.println("\nCliente deletado com sucesso!");
-                 }//fecha if
-        }catch (SQLException e) {
-                 throw new SQLException("\nErro ao deletar cliente!");
-        } finally {
-            conexao.close();
-            comando.close();
-        }//fecha finally
-            
-    }//fecha deletarCliente
-
+       
     public List<Cliente> listarClientes() throws ClassNotFoundException, SQLException {
         List<Cliente> listaClientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
@@ -212,7 +210,7 @@ public class ClienteDAO {
     
     }//fecha listarClientes
 
-    public boolean verificaRg(String _rg) throws ClassNotFoundException, SQLException {
+    public boolean verificaClienteRg(String _rg) throws ClassNotFoundException, SQLException {
         try{
             String sql = "SELECT * FROM cliente WHERE rg = ?";      
                 conectar(sql);
@@ -230,7 +228,7 @@ public class ClienteDAO {
                 return false;   
     }//fecha verificaRG
 
-    public boolean verificaNome(String _nome) throws ClassNotFoundException, SQLException {
+    public boolean verificaClienteNome(String _nome) throws ClassNotFoundException, SQLException {
         try{
             String sql = "SELECT * FROM cliente WHERE nome = ?";      
                 conectar(sql);

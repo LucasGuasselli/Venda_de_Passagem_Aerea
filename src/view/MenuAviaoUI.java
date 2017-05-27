@@ -5,7 +5,6 @@
  */
 package view;
 
-import repositorio.RepositorioAvioes;
 import util.Menu;
 import util.Opcao;
 
@@ -19,25 +18,27 @@ import util.Opcao;
 public class MenuAviaoUI  {
 
     //atributos
-    
     Opcao cadAvi = new Opcao("Cadastrar aviao");
-    Opcao verAvi = new Opcao("Visualizar avioes");  
+    Opcao edtAvi = new Opcao("Editar aviao");  
+    Opcao delAvi = new Opcao("Deletar aviao");
     Opcao pesquisarAviByCod = new Opcao("Pesquisar aviao pelo codigo");
+    Opcao pesquisarAviByNome = new Opcao("Pesquisa aviao pelo NOME");
+    Opcao verAvi = new Opcao("Vizualizar todos avioes");       
     Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
+    
 
     Menu menu = new Menu();
-    
-    private RepositorioAvioes lista;
-    int opcao;
-    
+    int opcao;    
     AviaoUI aviaoUI = new AviaoUI();
     
-    public MenuAviaoUI(RepositorioAvioes lista) {
-        this.lista = lista;
+    public MenuAviaoUI() {
         menu.addOption(cadAvi);
-        menu.addOption(verAvi);
+        menu.addOption(edtAvi);
+        menu.addOption(delAvi);
         menu.addOption(pesquisarAviByCod);
-        menu.addOption(menuPrincipal);
+        menu.addOption(pesquisarAviByNome);
+        menu.addOption(verAvi);
+        menu.addOption(menuPrincipal);        
     }//fecha construtor
     
     
@@ -47,15 +48,24 @@ public class MenuAviaoUI  {
                  //mostra opcoes adicionadas no menu
                 menu.show();
                 opcao = menu.getOption();
-                 switch(opcao){
+                switch(opcao){
                     case 1:
-                        aviaoUI.cadAviao(lista);
+                        aviaoUI.cadAviao();
                         break;
                     case 2:
-                        aviaoUI.showAvioes(lista);
+                        aviaoUI.editaAviao();
                         break;
                     case 3:
-                        aviaoUI.searchAviao(lista);
+                        aviaoUI.deletaCliente();
+                        break;
+                    case 4:
+                        aviaoUI.procurarAviaoPorCodigo();
+                        break;
+                    case 5:
+                        aviaoUI.procurarAvioesPorNome();
+                        break;                        
+                    case 6:
+                        aviaoUI.visualizarAvioes();
                         break;
                     case 0:
                         System.out.println("Retornando ao menu principal");

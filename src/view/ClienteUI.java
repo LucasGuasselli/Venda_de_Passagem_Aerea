@@ -30,7 +30,7 @@ public class ClienteUI {
             int limit = 10;            
             
                 rg = d.digitaRg("\n(min 4 e max 10 digitos)\nDigite o rg do(a) Cliente: ");
-            if(cDAO.verificaRg(rg)){
+            if(cDAO.verificaClienteRg(rg)){
                 System.out.println("\nCliente ja esta cadastrado(a)");                
             }else{       
                                  
@@ -51,25 +51,20 @@ public class ClienteUI {
         }//fecha if-else
     
     public void editaCliente() throws SQLException, ClassNotFoundException{
-         //variaveis locais
-     
+         //variaveis locais     
             int limit = 10;
             String rg = "0000000000";
             Cliente cli;
                 rg = d.digitaRg("\n(min 4 e max 10 digitos)\nDigite o rg do(a) Cliente que deseja alterar: ");
             
-            if(!cDAO.verificaRg(rg)){
+            if(!cDAO.verificaClienteRg(rg)){
                 System.out.println("\nCliente nao esta cadastrado");                
             }else{
-            cli = (cDAO.procurarPorRg(rg));
-            
-               //variaveis locais
-                      String  novoRg = d.digitaRg("\n(min 4 e max 10 digitos)\nDigite o NOVO rg do(a) Cliente que deseja alterar: ");
-
+            cli = (cDAO.procurarClientePorRg(rg));            
+                limit = 14;
+                String  novoRg = d.digitaRg("\n(min 4 e max 10 digitos)\nDigite o NOVO rg do(a) Cliente que deseja alterar: ");
                 String nome = d.digitaNome("\nDigite o nome do(a) Cliente: ");
                 String telefone = "(00)00000-0000";
-                limit = 14;
-                
                     do{
                       telefone = d.digita("\n(min 8 e max 14 digitos)\nDigite "
                             + "o telefone do(a) Cliente: ");                    
@@ -85,11 +80,11 @@ public class ClienteUI {
     
     public void deletaCliente() throws ClassNotFoundException, SQLException {
                 String rg = (d.digita("Digite o RG do(a) cliente que deseja deletar: "));
-            if(!cDAO.verificaRg(rg)){
+            if(!cDAO.verificaClienteRg(rg)){
                     System.out.println("\nCliente nao esta cadastrado");                
             }else{        
             try{
-                Cliente cli = cDAO.procurarPorRg(rg);
+                Cliente cli = cDAO.procurarClientePorRg(rg);
                    cDAO.deletarCliete(cli);
             }catch(Exception e){
                    System.out.println("ERRO ao deletar cliente");
@@ -100,11 +95,11 @@ public class ClienteUI {
     public void procurarPorRg() throws ClassNotFoundException, SQLException{
         
       String rg = (d.digita("Digite o RG do(a) cliente que deseja visualizar: "));  
-            if(!cDAO.verificaRg(rg)){
+            if(!cDAO.verificaClienteRg(rg)){
                 System.out.println("\nCliente nao esta cadastrado");                
             }else{
             try{ 
-                Cliente cli = cDAO.procurarPorRg(rg);
+                Cliente cli = cDAO.procurarClientePorRg(rg);
                    showCliente(cli);       
             }catch(Exception e){
                    System.out.println("ERRO ao visualizar cliente");
@@ -114,10 +109,10 @@ public class ClienteUI {
     
     public void procurarClientesPorNome() throws ClassNotFoundException, SQLException {
             String nome = (d.digitaNome("\nDigite o nome do(a) Cliente: "));
-            if(cDAO.verificaNome(nome)){
+            if(cDAO.verificaClienteNome(nome)){
                 System.out.println("\nCliente nao esta cadastrado");                
             }else{ 
-                    List<Cliente> listaCliente = cDAO.listarPorNome(nome);
+                    List<Cliente> listaCliente = cDAO.procurarClientePorNome(nome);
                         mostrarClientes(listaCliente);
         }//if-else
     }//fecha pesquisarClientesPorNome
