@@ -45,7 +45,7 @@ public class VendaUI {
             System.out.println("\nClientes cadastrados:\n");
            // cliUI.showClientes(listaClientes);
             System.out.println("\nVoos cadastrados:\n");
-            vooUI.showVoos(listaVoos);
+            //vooUI.showVoos(listaVoos);
             
             do{
                 rg = d.digitaRg("\n(min 4 e max 10 digitos)\nInforme o rg do cliente que deseja realizar uma compra: ");

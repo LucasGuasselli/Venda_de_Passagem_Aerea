@@ -185,7 +185,6 @@ public class ClienteDAO {
     public List<Cliente> listarClientes() throws ClassNotFoundException, SQLException {
         List<Cliente> listaClientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
-
         try {
             conectar(sql);
             ResultSet resultado = comando.executeQuery();
@@ -197,8 +196,7 @@ public class ClienteDAO {
                 String telefone = resultado.getString("telefone");               
 
                 Cliente cli = new Cliente(id, rg, nome, telefone);
-                    listaClientes.add(cli);
-                    
+                    listaClientes.add(cli);                    
             }//fecha while
             return listaClientes;
         }catch (SQLException e) {

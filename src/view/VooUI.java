@@ -5,6 +5,10 @@
  */
 package view;
 
+import DAO.AviaoDAO;
+import DAO.VooDAO;
+import java.sql.SQLException;
+import java.util.List;
 import model.Aviao;
 import model.Voo;
 import repositorio.RepositorioAvioes;
@@ -21,6 +25,8 @@ import util.VerificaDatas;
  */
 public class VooUI {
     //atributos
+    private VooDAO vDAO = new VooDAO();
+    private AviaoDAO aDAO = new AviaoDAO();
     private Digita d = new Digita();
     private VerificaDatas verifica = new VerificaDatas();
     
@@ -28,20 +34,18 @@ public class VooUI {
     * @param ArrayList RepositorioVoos
     * @param ArrayList RepositorioAvioes
     */
-    public void cadVoo(RepositorioVoos listaVoos, RepositorioAvioes listaAvioes){
+    public void cadVoo() throws SQLException, ClassNotFoundException{
              //variaveis locais
-        if(listaAvioes.getListAvioes().size() > 0){
+        if(aDAO.verificaExistAviao() == true){
             int limit = 30;
             String origem = "";
             String destino = "";
             String dataVoo = "";
-            Aviao aviao = null;
+            Aviao aviao = null ;
             int codigoAviao = 0;
     
             origem = d.digitaNome("\n(min 3 e max 30 digitos)\nDigite o origem do voo: ");
-        
             destino = d.digitaNome("\n(min 3 e max 30 digitos)\nDigite o destino do voo: ");
-                 
         do{
             do{
                 dataVoo = d.digitaData("\nDigite a data do voo no formato (dd/mm/aaaa):");
@@ -50,12 +54,11 @@ public class VooUI {
                     }//fecha if
         }while(dataVoo.length() != 10 || verifica.verificaDataAnterior(dataVoo) == true);
             
-            codigoAviao = Integer.parseInt(d.digita("\nInforme o codigo do aviao:"));
+            codigoAviao = (d.digitaCodigo("\nInforme o codigo do aviao:"));
          
-        if(listaAvioes.AviaoExistByCod(codigoAviao) == true){
-            if(listaVoos.verificaAviao(listaAvioes.retornaAviao(codigoAviao)) == false
-                    || listaVoos.verificaDataVoos(dataVoo) == true){
-                aviao = listaAvioes.retornaAviao(codigoAviao);
+        if(aDAO.verificaAviaoByCod(codigoAviao) == true){
+            if( vDAO.verificaDataAviao(codigoAviao,dataVoo) == false){
+                aviao = (aDAO.procurarAviaoByCod(codigoAviao));
             }else{
                 System.out.println("Aviao ja possui um voo nessa data");
             }
@@ -65,7 +68,7 @@ public class VooUI {
         }while(aviao == null);
                
         try{
-              listaVoos.addVoo(new Voo(origem, destino, dataVoo, aviao, aviao.getQtdeAssentos()));
+            vDAO.cadastrarVoo (new Voo(origem, destino, dataVoo, aviao));
                     System.out.println("VOO CADASTRADO COM SUCESSO!!!");
             } catch (Exception e){
                     System.out.println("ERRO ao cadastrar voo");
@@ -78,34 +81,58 @@ public class VooUI {
     
     }//fecha cadVoo
     
-    //METODO QUE MOSTRA OS VOOS CADASTRADOS
-    //@param ArrayList RepositorioVoos
+    public void visualizarVoos() throws ClassNotFoundException, SQLException {
+        List<Voo> listaVoos = vDAO.listarVoos();
+                mostrarVoos(listaVoos);        
+    }//fecha visualizarClientes
 
-    public void showVoos(RepositorioVoos listaVoos){
- 
-        if(listaVoos.getListVoos().size() <=0){
-           System.out.println("###################################");
-           System.out.println("Nao existem voos cadastrados!!!!");
-       }else{
-           System.out.println("###################################\n");
+    public void pesquisaVooPorAviao(AviaoUI aviaoui) throws SQLException, ClassNotFoundException {
+        if(aDAO.verificaExistAviao() == true){
+            List<Aviao> listaAvioes = aDAO.listarAvioes();
+                aviaoui.mostrarAvioes(listaAvioes);
+                int id = Integer.parseInt(d.digita("\nInforme o ID do aviao: "));
+               List<Voo> listaVoos = vDAO.listarVoos(id);
+                    mostrarVoos(listaVoos);
+        }else{
+                System.out.println("So e permitido a pesquisa de voo quando tiver pelo menos"
+                + "um aviao cadastrado");
+        }//fecha if-else
+    }//fecha pesquisaVooPorAviao
+    
+    private void mostrarVoos(List<Voo> listaVoos) {
+        if (listaVoos.isEmpty()) {
+            System.out.println("\nVoo(s) nao encontrado(s)!");
+        } else {
+            System.out.println("###################################\n");
            
-           //formatacao para exibir voos
-           
-            for (Voo voo : listaVoos.getListVoos()) {
-               System.out.println(String.format("%-10s", "ORIGEM DO VOO") + "\t"
-                    + String.format("%-20s", "|DESTINO DO VOO") + "\t"
-                    + String.format("%-15s", "|HORARIO DO VOO"));
+            System.out.println(String.format("%-10s", "ORIGEM") + "\t"
+                    + String.format("%-20s", "|DESTINO") + "\t"
+                    + String.format("%-20s", "|DATA") + "\t"
+                    + String.format("%-15s", "|ID DO AVIAO"));
+            for (Voo voo : listaVoos) {
                 System.out.println(String.format("%-10s", voo.getOrigem()) + "\t"
                         + String.format("%-20s", "|" + voo.getDestino()) + "\t"
-                        + String.format("%-15s", "|" + voo.getDataVoo()));
-               
-            System.out.println(voo.getAviao());
-            System.out.println("=============================================\n");
-            }//fecha for
-             
-            }//fechaif-else     
-           
-    }//fecha metodo
+                        + String.format("%-20s", voo.getDataVoo()) + "\t"
+                        + String.format("%-15s", "|" + voo.getIdAviao()));
+            }//fea for
+        }//fecha if-else 
+    }//fecha mostrarVoos
+    
+    public void mostrarVoo(Voo voo){
+ 
+        System.out.println("###################################\n");           
+           //formatacao para exibir voos
+           System.out.println(String.format("%-10s", "ORIGEM") + "\t"                    
+                    + String.format("%-20s", "DESTINO") + "\t"
+                    + String.format("%-20s", "|DATA DO VOO") + "\t"
+                    );
+        
+            System.out.println(String.format("%-10s", voo.getOrigem()) + "\t"
+                    + String.format("%-20s", "|" + voo.getDestino() + "\t"
+                    + String.format("%-20s", voo.getDataVoo()) + "\t"
+                    ));          
+    }//fecha método
+    
      /*METODO QUE VERIFICA SE UM VOO ESTA CADASTRADO
     *@param ArrayList o tipo RepositorioVoos
     *@param ArrayList o tipo RepositorioAvioes
@@ -149,5 +176,7 @@ public class VooUI {
          voo.mostraAssentos();
     
     }//fecha metodo
+
+    
     
 }//fecha classe

@@ -16,7 +16,7 @@ public class ConnectionFactory {
   
         private static String url = "jdbc:postgresql://localhost:5432/postgres";
         private static String usuario = "postgres";
-        private static String senha = "123456";
+        private static String senha = "@Zackk0265";
              
         public ConnectionFactory(){
         

@@ -98,7 +98,7 @@ public class AviaoDAO {
 
     public Aviao procurarAviaoByCod(int _codigo) throws SQLException, ClassNotFoundException {
         try{
-            String sql = "SELECT * FROM aviao WHERE codigo = ?";
+            String sql = "SELECT * FROM aviao WHERE id = ?";
             conectar(sql);
                    comando.setInt(1,_codigo);
             ResultSet resultado = comando.executeQuery();
@@ -180,7 +180,7 @@ public class AviaoDAO {
     
     public boolean verificaAviaoByCod(int _codigo) throws SQLException, ClassNotFoundException {
         try{
-            String sql = "SELECT * FROM aviao WHERE codigo = ?";      
+            String sql = "SELECT * FROM aviao WHERE id = ?";      
                 conectar(sql);
                 comando.setInt(1, _codigo);
             ResultSet resultado = comando.executeQuery();
@@ -188,7 +188,7 @@ public class AviaoDAO {
                     return true;
                 }//fecha if
         }catch (SQLException e) {
-                throw new SQLException("\nErro ao verificar cliente!");
+                throw new SQLException("\nErro ao verificar aviao!");
         } finally {
             conexao.close();
             comando.close();
@@ -214,4 +214,20 @@ public class AviaoDAO {
                 return false; 
     }//fecha metodo verificaNome
     
+    public boolean verificaExistAviao() throws SQLException, ClassNotFoundException {
+        try{
+            String sql = "SELECT * FROM aviao";      
+                conectar(sql);
+            ResultSet resultado = comando.executeQuery();
+                if(resultado.next()) {                
+                    return true;
+                }//fecha if
+        }catch (SQLException e) {
+                throw new SQLException("\nErro ao verificar aviao!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+                return false;   
+    }//fecha verifricaAviaoByCod
 }//fecha classe

@@ -122,7 +122,7 @@ public class AviaoUI {
     public void showAviao(Aviao avi){
  
         System.out.println("###################################\n");           
-           //formatacao para exibir Clientes
+           //formatacao para exibir aviao
            System.out.println(String.format("%-10s", "ID") + "\t"                    
                     + String.format("%-20s", "CODIGO") + "\t"
                     + String.format("%-20s", "|NOME") + "\t"
@@ -134,7 +134,7 @@ public class AviaoUI {
                     + String.format("%-10s", "|" + avi.getQtdeAssentos()));          
     }//fecha método
 
-    private void mostrarAvioes(List<Aviao> listaAvioes) {
+    void mostrarAvioes(List<Aviao> listaAvioes) {
         if (listaAvioes.isEmpty()) {
             System.out.println("\nAviao(oes) nao encontrado(s)!");
         } else {

@@ -25,24 +25,18 @@ public class MenuVooUI {
 
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
-        Menu menu = new Menu();
-       
-       
-        private RepositorioVoos listaVoos;
-        private RepositorioAvioes listaAvioes;
-        int opcao;
-        
+        Menu menu = new Menu();      
+        int opcao;       
         VooUI VooUI = new VooUI();
+        AviaoUI AviaoUI = new AviaoUI();
         
         //construtor
         public MenuVooUI(RepositorioVoos listaVoos, RepositorioAvioes listaAvioes) {
-           this.listaVoos = listaVoos;
-           this.listaAvioes = listaAvioes;
-           menu.addOption(cadVoo);
-           menu.addOption(verVoo);
-           menu.addOption(pesquisaVooByAviao);
-           menu.addOption(verAssentos);
-           menu.addOption(menuPrincipal);
+            menu.addOption(cadVoo);
+            menu.addOption(verVoo);
+            menu.addOption(pesquisaVooByAviao);
+            menu.addOption(verAssentos);
+            menu.addOption(menuPrincipal);
         }//fecha construtor
         
         public void menuVoo(){
@@ -53,16 +47,15 @@ public class MenuVooUI {
                 opcao = menu.getOption();
                  switch(opcao){
                     case 1:
-                        VooUI.cadVoo(listaVoos, listaAvioes);
+                        VooUI.cadVoo();
                         break;
                     case 2:
-                        VooUI.showVoos(listaVoos);
+                        VooUI.visualizarVoos();
                         break;
                     case 3:
-                        VooUI.searchVoo(listaVoos ,listaAvioes);
+                        VooUI.pesquisaVooPorAviao(AviaoUI);
                         break;
                     case 4:
-                        VooUI.verAssentos(listaVoos, listaAvioes);
                         break;
                     case 0:
                         System.out.println("Retornando ao menu principal");

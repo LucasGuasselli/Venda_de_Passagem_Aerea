@@ -1,6 +1,7 @@
 
 package model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import util.Digita;
@@ -15,33 +16,41 @@ import util.Digita;
 public class Voo {
     
     //atributos
+    private int idVoo;
     private Digita d = new Digita();
     private String origem;
     private String destino;
     private LocalDate dataVoo;
     private Aviao aviao = null;
+    private int idAviao;
   
     private  boolean[] controlaAssentos; 
     private int meuAssento = 0;
     
     DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-
     //construtor
     
-    public Voo(String origem,String destino, String horarioVoo, Aviao aviao, int quantidade){
+    public Voo(String origem,String destino, String horarioVoo, Aviao aviao){
         this.origem = origem;
         this.destino = destino;
         this.dataVoo = LocalDate.parse(horarioVoo ,formatadorData);
         this.aviao = aviao;
-        this.controlaAssentos = new boolean[quantidade];
-       
-        
+       // this.controlaAssentos = new boolean[quantidade];
+        this.idAviao = aviao.getId();        
     }//fecha construtor
     
-    //metodos
-    
-      
+    public Voo(int idVoo, String origem,String destino, LocalDate horarioVoo, Aviao aviao){
+        this.idVoo = idVoo;
+        this.origem = origem;
+        this.destino = destino;
+        this.dataVoo = horarioVoo;
+        this.aviao = aviao;
+       // this.controlaAssentos = new boolean[quantidade];
+        this.idAviao = aviao.getId();        
+    }//fecha construtor
+         
+    //metodos     
     public void mostraAssentos(){
         System.out.println("Quantidade de assentos: " + aviao.getQtdeAssentos());
         for(int i = 0; i < controlaAssentos.length;i++){
@@ -102,7 +111,9 @@ public class Voo {
     public void setAviao(Aviao aviao) {
         this.aviao = aviao;
     }
-   
+    public void setIdVoo(int idVoo) {
+        this.idVoo = idVoo;
+    }
     //TERMINA SETS
     
     public boolean[] getControlaAssentos() {
@@ -126,7 +137,12 @@ public class Voo {
     public Aviao getAviao() {
         return aviao;
     }
-    
+    public int getIdVoo() {
+        return idVoo;
+    }
+    public int getIdAviao() {
+        return idAviao;
+    }
     //TERMINA GETS
     
    
