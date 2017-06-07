@@ -5,10 +5,6 @@
  */
 package view;
 
-import repositorio.RepositorioAvioes;
-import repositorio.RepositorioClientes;
-import repositorio.RepositorioVendas;
-import repositorio.RepositorioVoos;
 import util.Menu;
 import util.Opcao;
 
@@ -26,21 +22,12 @@ public class MenuVendaUI {
         
         Menu menu = new Menu();
                
-        private RepositorioVendas listaVendas;      
-        private RepositorioVoos listaVoos;
-        private RepositorioClientes listaClientes;
-        private RepositorioAvioes listaAvioes;
-
         int opcao;
         
         VendaUI vendaUI = new VendaUI();
         
         //construtor
-        public MenuVendaUI(RepositorioVendas listaVendas, RepositorioClientes listaClientes,RepositorioAvioes listaAvioes, RepositorioVoos listaVoos) {
-          this.listaVendas = listaVendas;
-          this.listaClientes = listaClientes;
-          this.listaAvioes = listaAvioes;
-          this.listaVoos = listaVoos;
+        public MenuVendaUI() {
            menu.addOption(cadVenda);
            menu.addOption(verVenda);
            menu.addOption(menuPrincipal);
@@ -54,10 +41,10 @@ public class MenuVendaUI {
                 opcao = menu.getOption();
                  switch(opcao){
                     case 1:
-                        vendaUI.cadVenda(listaVendas,listaClientes,listaAvioes, listaVoos);
+                        //vendaUI.cadVenda();
                         break;
                     case 2:
-                        vendaUI.verVenda(listaVendas);
+                        //vendaUI.verVenda();
                     case 0:
                         System.out.println("Retornando ao menu principal");
                         break;

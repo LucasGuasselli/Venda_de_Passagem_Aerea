@@ -5,8 +5,6 @@
  */
 package view;
 
-import repositorio.RepositorioAvioes;
-import repositorio.RepositorioVoos;
 import util.Menu;
 import util.Opcao;
 
@@ -31,7 +29,7 @@ public class MenuVooUI {
         AviaoUI AviaoUI = new AviaoUI();
         
         //construtor
-        public MenuVooUI(RepositorioVoos listaVoos, RepositorioAvioes listaAvioes) {
+        public MenuVooUI() {
             menu.addOption(cadVoo);
             menu.addOption(verVoo);
             menu.addOption(pesquisaVooByAviao);
@@ -56,6 +54,7 @@ public class MenuVooUI {
                         VooUI.pesquisaVooPorAviao(AviaoUI);
                         break;
                     case 4:
+                        VooUI.verAssentos();
                         break;
                     case 0:
                         System.out.println("Retornando ao menu principal");

@@ -27,8 +27,8 @@ public class VendaUI {
     //atributos
     private Digita d = new Digita();
     private VerificaDatas verifica = new VerificaDatas();
+    
    //METODO QUE REALIZA O CADASTRO DA VENDA 
-    //@param recebe todos os ArrayList do sistema         
     public void cadVenda(RepositorioVendas listaVendas, RepositorioClientes listaClientes, RepositorioAvioes listaAvioes, RepositorioVoos listaVoos){
         ClienteUI cliUI = new ClienteUI();
         VooUI vooUI = new VooUI();            
@@ -72,28 +72,26 @@ public class VendaUI {
                 }//fecha-if-else
                }while(voo == null);  
             
-        voo.reservaAssento();
+        //voo.reservaAssento();
             
         try{
               listaVendas.addVenda(new Venda(cliente, voo));
                     System.out.println("VENDA CADASTRADA COM SUCESSO!!!");
             } catch (Exception e){
                     System.out.println("ERRO ao cadastrar voo");
-                }//try-catch
-   
+                }//try-catch   
         }else{
                 System.out.println("So e permitido realizar uma venda quando tiver pelo menos"
                         + " um cliente e um voo cadastrado!");
         }//fecha if-else
     
     }//fecha cadVoo
-//METODO QUE MOSTRA TODAS AS VENDAS REALIZADAS 
-   //@param ArrayList do tipo RepositorioVendas
-   public void verVenda(RepositorioVendas listaVendas) {
+    //METODO QUE MOSTRA TODAS AS VENDAS REALIZADAS 
+    public void verVenda(RepositorioVendas listaVendas) {
         if(listaVendas.getListVendas().size() <=0){
            System.out.println("###################################");
            System.out.println("Nenhuma venda foi realizada!!!!");
-       }else{
+        }else{
            System.out.println("###################################\n");
            
            //formatacao para exibir voos
@@ -107,12 +105,8 @@ public class VendaUI {
                                       System.out.println(String.format("%-10s", "Assento n: " +venda.getVoo().getMeuAssento()) + "\t");    
                                 
             System.out.println("=============================================\n");
-            }//fecha for
-             
-            }//fechaif-else   
-   }//fecha classe
-    
-    
-    
+            }//fecha for             
+        }//fechaif-else   
+   }//fecha classe  
     
 }//fecha classe

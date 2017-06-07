@@ -5,7 +5,6 @@
  */
 package view;
 
-import repositorio.RepositorioClientes;
 import util.Menu;
 import util.Opcao;
 

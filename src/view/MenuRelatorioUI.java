@@ -5,10 +5,6 @@
  */
 package view;
 
-import repositorio.RepositorioAvioes;
-import repositorio.RepositorioClientes;
-import repositorio.RepositorioVendas;
-import repositorio.RepositorioVoos;
 import util.Menu;
 import util.Opcao;
 

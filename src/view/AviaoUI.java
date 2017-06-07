@@ -9,7 +9,6 @@ import DAO.AviaoDAO;
 import java.sql.SQLException;
 import java.util.List;
 import model.Aviao;
-import repositorio.RepositorioAvioes;
 import util.Digita;
 
 /**
@@ -58,11 +57,11 @@ public class AviaoUI {
             int codigo;
             int novoQtdeAssentos;
 
-                codigo = d.digitaCodigo("\n(Deve ser > 0 E < 999)\nDigite o codigo do Aviao: "); 
+                codigo = d.digitaCodigo("\n(Deve ser > 0 E < 999)\nDigite o ID do Aviao: "); 
             if(!aDAO.verificaAviaoByCod(codigo)){
                 System.out.println("\nAviao nao esta cadastrado");                
             }else{
-                avi = aDAO.procurarAviaoByCod(codigo);
+                avi = aDAO.retornaAviaoByCod(codigo);
                 int novoCodigo = d.digitaCodigo("\n(Deve ser > 0 E < 999)\nDigite o NOVO codigo do Aviao: ");
                 String novoNome = d.digitaNome("\nDigite o nome do aviao: ");
                     do{
@@ -84,7 +83,7 @@ public class AviaoUI {
                     System.out.println("\nAviao nao esta cadastrado");                
             }else{        
             try{
-                Aviao avi = aDAO.procurarAviaoByCod(codigo);
+                Aviao avi = aDAO.retornaAviaoByCod(codigo);
                    aDAO.deletarAviao(avi);
             }catch(Exception e){
                    System.out.println("ERRO ao deletar aviao");
@@ -99,7 +98,7 @@ public class AviaoUI {
                 System.out.println("\nAviao nao esta cadastrado");                
             }else{
             try{ 
-                Aviao avi = aDAO.procurarAviaoByCod(codigo);
+                Aviao avi = aDAO.retornaAviaoByCod(codigo);
                    showAviao(avi);       
             }catch(Exception e){
                    System.out.println("ERRO ao visualizar aviao");
@@ -112,7 +111,7 @@ public class AviaoUI {
             if(aDAO.verificaAviaoNome(nome)){
                 System.out.println("\nAviao nao esta cadastrado");                
             }else{ 
-                    List<Aviao> listaAviao = aDAO.procurarAviaoPorNome(nome);
+                    List<Aviao> listaAviao = aDAO.retornaAviaoPorNome(nome);
                         mostrarAvioes(listaAviao);
         }//if-else
     }//fecha pesquisarClientesPorNome
@@ -154,7 +153,7 @@ public class AviaoUI {
     }//fecha mostrarClientes  
     
     public void visualizarAvioes() throws ClassNotFoundException, SQLException {
-        List<Aviao> listaAvioes = aDAO.listarAvioes();
+        List<Aviao> listaAvioes = aDAO.retornalistarAvioes();
                 mostrarAvioes(listaAvioes);        
     }//fecha visualizarClientes
           

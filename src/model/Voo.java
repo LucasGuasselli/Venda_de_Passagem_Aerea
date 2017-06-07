@@ -1,7 +1,6 @@
 
 package model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import util.Digita;
@@ -49,45 +48,7 @@ public class Voo {
        // this.controlaAssentos = new boolean[quantidade];
         this.idAviao = aviao.getId();        
     }//fecha construtor
-         
-    //metodos     
-    public void mostraAssentos(){
-        System.out.println("Quantidade de assentos: " + aviao.getQtdeAssentos());
-        for(int i = 0; i < controlaAssentos.length;i++){
-            if(controlaAssentos[i] == true){
-                System.out.println("Assento " + (i+1)+ ": " + "Ocupado");
-            }else{
-                System.out.println("Assento " + (i+1)+ ": " + "Disponivel");
-            }//fecha if-else    
-        }//fecha for
-            
-    }//fecha metodo
-    
-    public void mostraAssentosDisponiveis(){
-        for(int i = 0; i < controlaAssentos.length;i++){
-            if(controlaAssentos[i] == false){
-                System.out.println("Assento " + (i+1)+ ": " + "Disponivel");
-            }//fecha if   
-        }//fecha for
-    }//fecha classe
-    
-   public void reservaAssento(){
-      int assento;
-      boolean loop = true;
-        mostraAssentosDisponiveis();
-            do{
-            assento = Integer.parseInt(d.digita("Selecione o assento desejado: "));
-                if(controlaAssentos[assento-1] == false){
-                    controlaAssentos[assento-1] = true;
-                    setMeuAssento(assento);
-                    System.out.println("Assento reservado!");
-                    loop = false;
-                }else{
-                    System.out.println("selecione um assento disponivel!");
-                }//fecha if-else
-            }while(loop == true);
-   }//fecha metodo
-   
+          
     //SETS E GETS
 
     public void setControlaAssentos(boolean[] controlaAssentos) {

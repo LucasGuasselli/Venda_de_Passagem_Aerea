@@ -21,7 +21,7 @@ public class MenuAviaoUI  {
     Opcao cadAvi = new Opcao("Cadastrar aviao");
     Opcao edtAvi = new Opcao("Editar aviao");  
     Opcao delAvi = new Opcao("Deletar aviao");
-    Opcao pesquisarAviByCod = new Opcao("Pesquisar aviao pelo codigo");
+    Opcao pesquisarAviByCod = new Opcao("Pesquisar aviao pelo ID");
     Opcao pesquisarAviByNome = new Opcao("Pesquisa aviao pelo NOME");
     Opcao verAvi = new Opcao("Vizualizar todos avioes");       
     Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
@@ -39,8 +39,7 @@ public class MenuAviaoUI  {
         menu.addOption(pesquisarAviByNome);
         menu.addOption(verAvi);
         menu.addOption(menuPrincipal);        
-    }//fecha construtor
-    
+    }//fecha construtor    
     
     public void menuAviao(){ 
         try{   

@@ -5,12 +5,9 @@
  */
 package view;
 
-import repositorio.RepositorioAvioes;
 import util.Opcao;
 import util.Menu;
-import repositorio.RepositorioClientes;
-import repositorio.RepositorioVendas;
-import repositorio.RepositorioVoos;
+
 /**
  *
  * @author Lucas Guasselli de Moraes
@@ -22,28 +19,21 @@ import repositorio.RepositorioVoos;
 public class MenuUI {
     
     //atributos
-    private RepositorioClientes listaClientes; 
-    private RepositorioAvioes listaAvioes;
-    private RepositorioVoos listaVoos;
-    private RepositorioVendas listaVendas;
+   
     private int opcao;
     
     //construtor
     public MenuUI(){
-            listaClientes = new RepositorioClientes();  
-            listaAvioes = new RepositorioAvioes();
-            listaVoos = new RepositorioVoos();
-            listaVendas = new RepositorioVendas();
+            
     }//fecha construtor     
     
     public void executar(){      
         
         MenuClienteUI menuCliUI = new MenuClienteUI();
         MenuAviaoUI menuAviUI = new MenuAviaoUI();
-        MenuVooUI menuVooUI = new MenuVooUI(listaVoos, listaAvioes);
-        MenuVendaUI menuVendaUI = new MenuVendaUI(listaVendas,listaClientes,listaAvioes, listaVoos);
-
-
+        MenuVooUI menuVooUI = new MenuVooUI();
+        MenuVendaUI menuVendaUI = new MenuVendaUI();
+        
         //criando opcoes
         Opcao menuCliente = new Opcao("Acessar o menu de cliente");
         Opcao menuAviao = new Opcao("Acessar o menu de avioes");

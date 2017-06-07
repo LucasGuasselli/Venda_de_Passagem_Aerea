@@ -35,8 +35,7 @@ public class AviaoDAO {
     
     public void cadastrarAviao(Aviao aviao) throws SQLException, ClassNotFoundException{
         
-        //CADASTRANDO Cliente
-        
+        //CADASTRANDO aviao        
         try{   
             String sql = "insert into aviao(codigo, nome, qtdeAssentos) VALUES (?, ?, ?)";
                conectar(sql);
@@ -52,15 +51,13 @@ public class AviaoDAO {
         } finally {
             conexao.close();
             comando.close();
-        }//fecha finally
-   
-            
+        }//fecha finally           
     }//fecha cadastrarAviao
 
     public void editarAviao(Aviao aviao) throws SQLException, ClassNotFoundException{
         try{
             String sql = "UPDATE aviao SET codigo=?, nome=?, qtdeAssentos=?"
-                    + "WHERE id=?";
+                    + "WHERE idAviao=?";
 
             conectar(sql);
             comando.setInt(1, aviao.getCodigo());
@@ -69,12 +66,12 @@ public class AviaoDAO {
             comando.setInt(4, aviao.getId());
             comando.executeUpdate();      
         }catch (SQLException e) {
-                 throw new SQLException("\nErro ao editar cliente!");
+                 throw new SQLException("\nErro ao editar aviao!");
         } finally {
             conexao.close();
             comando.close();
         }//fecha finally
-    }//fecha editarCliente
+    }//fecha editarAviao
     
     public void deletarAviao(Aviao aviao) throws SQLException, ClassNotFoundException{
         
@@ -92,24 +89,22 @@ public class AviaoDAO {
         } finally {
             conexao.close();
             comando.close();
-        }//fecha finally
-            
-    }//fecha deletarCliente
+        }//fecha finally            
+    }//fecha deletarAviao
 
-    public Aviao procurarAviaoByCod(int _codigo) throws SQLException, ClassNotFoundException {
+    public Aviao retornaAviaoByCod(int _codigo) throws SQLException, ClassNotFoundException {
         try{
-            String sql = "SELECT * FROM aviao WHERE id = ?";
+            String sql = "SELECT * FROM aviao WHERE idAviao = ?";
             conectar(sql);
                    comando.setInt(1,_codigo);
             ResultSet resultado = comando.executeQuery();
             if (resultado.next()) {
-                int id = resultado.getInt("id");
+                int id = resultado.getInt("idAviao");
                 int codigo = resultado.getInt("codigo");
                 String nome = resultado.getString("nome");
                 int qtdeAssentos = resultado.getInt("qtdeAssentos");
                 
                 Aviao avi = new Aviao(id, codigo, nome, qtdeAssentos);
-
                 return avi;
             }//terminar caminho feliz (IF)
         }catch (SQLException e) {
@@ -117,70 +112,65 @@ public class AviaoDAO {
         } finally {
             conexao.close();
             comando.close();
-        }//fecha finally
-        
+        }//fecha finally        
         return (null);   
     }//fecha procurarAviaoByCid
     
-    public List<Aviao> procurarAviaoPorNome(String _nome) throws ClassNotFoundException, SQLException {
+    public List<Aviao> retornaAviaoPorNome(String _nome) throws ClassNotFoundException, SQLException {
         List<Aviao> listaAvioes = new ArrayList<>();
         String sql = "SELECT * FROM aviao WHERE nome LIKE ?";
-
         try {
             conectar(sql);
             comando.setString(1, "%" + _nome + "%");
             ResultSet resultado = comando.executeQuery();
 
             while (resultado.next()) {
-                int id = resultado.getInt("id");
+                int id = resultado.getInt("idAviao");
                 int codigo = resultado.getInt("codigo");
                 String nome = resultado.getString("nome");
                 int qtdeAssentos = resultado.getInt("qtdeAssentos");               
 
                 Aviao avi = new Aviao(id, codigo, nome, qtdeAssentos);
-                    listaAvioes.add(avi);
-                    
+                    listaAvioes.add(avi);                    
             }//fecha while
             return listaAvioes;
         }catch (SQLException e) {
-                 throw new SQLException("\nErro ao procurar cliente!");
+                 throw new SQLException("\nErro ao procurar aviao!");
         } finally {
             conexao.close();
             comando.close();
         }//fecha finally
     }//fecha metodo listarPorNome
     
-    public List<Aviao> listarAvioes() throws ClassNotFoundException, SQLException {
+    public List<Aviao> retornalistarAvioes() throws ClassNotFoundException, SQLException {
         List<Aviao> listaAvioes = new ArrayList<>();
         String sql = "SELECT * FROM aviao";
 
         try {
             conectar(sql);
             ResultSet resultado = comando.executeQuery();
-
+            
             while (resultado.next()) {
-                int id = resultado.getInt("id");
+                int id = resultado.getInt("idAviao");
                 int codigo = resultado.getInt("codigo");
                 String nome = resultado.getString("nome");
                 int qtdeAssentos= resultado.getInt("qtdeAssentos");               
 
                 Aviao avi = new Aviao(id, codigo, nome, qtdeAssentos);
-                    listaAvioes.add(avi);
-                    
+                    listaAvioes.add(avi);                    
             }//fecha while
             return listaAvioes;
         }catch (SQLException e) {
-                 throw new SQLException("\nErro ao procurar cliente!");
+                 throw new SQLException("\nErro ao procurar aviao!");
         } finally {
             conexao.close();
             comando.close();
-        }//fecha finally
-    
+        }//fecha finally    
     }//fecha listarClientes
     
     public boolean verificaAviaoByCod(int _codigo) throws SQLException, ClassNotFoundException {
         try{
-            String sql = "SELECT * FROM aviao WHERE id = ?";      
+            String sql = "SELECT * FROM aviao WHERE idAviao = ?";      
                 conectar(sql);
                 comando.setInt(1, _codigo);
             ResultSet resultado = comando.executeQuery();
@@ -229,5 +219,5 @@ public class AviaoDAO {
             comando.close();
         }//fecha finally
                 return false;   
-    }//fecha verifricaAviaoByCod
+    }//fecha verificaExistAviao
 }//fecha classe

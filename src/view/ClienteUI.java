@@ -60,7 +60,7 @@ public class ClienteUI {
             if(!cDAO.verificaClienteRg(rg)){
                 System.out.println("\nCliente nao esta cadastrado");                
             }else{
-            cli = (cDAO.procurarClientePorRg(rg));            
+            cli = (cDAO.retornaClientePorRg(rg));            
                 limit = 14;
                 String  novoRg = d.digitaRg("\n(min 4 e max 10 digitos)\nDigite o NOVO rg do(a) Cliente que deseja alterar: ");
                 String nome = d.digitaNome("\nDigite o nome do(a) Cliente: ");
@@ -84,7 +84,7 @@ public class ClienteUI {
                     System.out.println("\nCliente nao esta cadastrado");                
             }else{        
             try{
-                Cliente cli = cDAO.procurarClientePorRg(rg);
+                Cliente cli = cDAO.retornaClientePorRg(rg);
                    cDAO.deletarCliete(cli);
             }catch(Exception e){
                    System.out.println("ERRO ao deletar cliente");
@@ -99,7 +99,7 @@ public class ClienteUI {
                 System.out.println("\nCliente nao esta cadastrado");                
             }else{
             try{ 
-                Cliente cli = cDAO.procurarClientePorRg(rg);
+                Cliente cli = cDAO.retornaClientePorRg(rg);
                    showCliente(cli);       
             }catch(Exception e){
                    System.out.println("ERRO ao visualizar cliente");
@@ -112,7 +112,7 @@ public class ClienteUI {
             if(cDAO.verificaClienteNome(nome)){
                 System.out.println("\nCliente nao esta cadastrado");                
             }else{ 
-                    List<Cliente> listaCliente = cDAO.procurarClientePorNome(nome);
+                    List<Cliente> listaCliente = cDAO.retornaClientePorNome(nome);
                         mostrarClientes(listaCliente);
         }//if-else
     }//fecha pesquisarClientesPorNome
@@ -154,7 +154,7 @@ public class ClienteUI {
     }//fecha mostrarClientes  
     
     public void visualizarClientes() throws ClassNotFoundException, SQLException {
-        List<Cliente> listaClientes = cDAO.listarClientes();
+        List<Cliente> listaClientes = cDAO.retornaClientes();
                 mostrarClientes(listaClientes);        
     }//fecha visualizarClientes
           
