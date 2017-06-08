@@ -77,6 +77,6 @@ public class Digita {
                     telefone = ler.nextLine();                         
             }while(telefone.length() > limit || telefone.length() < limit);
                 return telefone;  
-    }//fecha metodo
-    
+    }//fecha metodo    
+   
 }//fecha classe

@@ -28,6 +28,13 @@ public class Assento {
         insereTxtDisp(this.disponibilidade);
     }//fecha  construtor
     
+    public Assento(int idAssento,int idVoo, int numAssento, boolean disponibilidade){
+        this.idAssento = idAssento;
+        this.idVoo = idVoo;
+        this.numAssento = numAssento;
+        this.disponibilidade = disponibilidade;
+        insereTxtDisp(this.disponibilidade);
+    }//fecha  construtor
     //metodos  
     /*
        

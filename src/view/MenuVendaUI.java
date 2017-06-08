@@ -20,10 +20,8 @@ public class MenuVendaUI {
         Opcao verVenda = new Opcao("Visualizar passageiros e seus assentos reservados");
         Opcao menuPrincipal = new Opcao("Voltar ao menu principal");
         
-        Menu menu = new Menu();
-               
-        int opcao;
-        
+        int opcao;   
+        Menu menu = new Menu();  
         VendaUI vendaUI = new VendaUI();
         
         //construtor
@@ -41,10 +39,10 @@ public class MenuVendaUI {
                 opcao = menu.getOption();
                  switch(opcao){
                     case 1:
-                        //vendaUI.cadVenda();
+                        vendaUI.cadVenda();
                         break;
                     case 2:
-                        //vendaUI.verVenda();
+                        vendaUI.mostrarVendas();
                     case 0:
                         System.out.println("Retornando ao menu principal");
                         break;

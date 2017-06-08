@@ -77,18 +77,18 @@ public class VooUI {
                 }//try-catch        
         }else{
                 System.out.println("So e permitido o cadastro de voo quando tiver pelo menos"
-                + "um aviao cadastrado");
+                + " um aviao cadastrado");
         }//fecha if-else    
     }//fecha cadVoo
     
     public void visualizarVoos() throws ClassNotFoundException, SQLException {
-        List<Voo> listaVoos = vDAO.retornalistarVoos();
+        List<Voo> listaVoos = vDAO.retornaListaVoos();
                 mostrarVoos(listaVoos);        
     }//fecha visualizarVoos
 
     public void pesquisaVooPorAviao(AviaoUI aviaoui) throws SQLException, ClassNotFoundException {
         if(aDAO.verificaExistAviao() == true){
-            List<Aviao> listaAvioes = aDAO.retornalistarAvioes();
+            List<Aviao> listaAvioes = aDAO.retornaListaAvioes();
                 aviaoui.mostrarAvioes(listaAvioes);
                 int id = Integer.parseInt(d.digita("\nInforme o ID do aviao: "));
                List<Voo> listaVoos = vDAO.retornalistarVoos(id);
@@ -109,7 +109,7 @@ public class VooUI {
 
         if(vDAO.verificaExistVoo() == true){
             try{
-            vDAO.retornalistarVoos();
+            vDAO.retornaListaVoos();
             idVoo = (d.digitaCodigo("\nInforme o id do voo: "));
             
                 if(vDAO.verificaExistVoo(idVoo) == true){
@@ -132,7 +132,7 @@ public class VooUI {
         }//fecha if-else
     }//fecha metodo
     
-    private void mostrarVoos(List<Voo> listaVoos) {
+    public void mostrarVoos(List<Voo> listaVoos) {
         if (listaVoos.isEmpty()) {
             System.out.println("\nVoo(s) nao encontrado(s)!");
         } else {
@@ -165,7 +165,7 @@ public class VooUI {
                     + String.format("%-20s", voo.getDataVoo()) + "\t"));          
     }//fecha método
     
-    private void mostrarAssentos(List<Assento> listaAssentos) {
+    public void mostrarAssentos(List<Assento> listaAssentos) {
         if (listaAssentos.isEmpty()) {
             System.out.println("\nAssento(s) nao encontrado(s)!");
         } else {
@@ -181,5 +181,7 @@ public class VooUI {
                         + String.format("%-25s", assento.getTextoDisponibilidade())) + "\t");
             }//fecha for
         }//fecha if-else 
-    }//fecha mostrarVoos       
+    }//fecha mostrarVoos 
+    
+    
 }//fecha classe

@@ -134,7 +134,7 @@ public class ClienteUI {
                     + String.format("%-15s", "|" + cli.getTelefone()));          
     }//fecha método
 
-    private void mostrarClientes(List<Cliente> listaClientes) {
+    public void mostrarClientes(List<Cliente> listaClientes) {
         if (listaClientes.isEmpty()) {
             System.out.println("\nCliente(s) nao encontrado(s)!");
         } else {
@@ -154,7 +154,7 @@ public class ClienteUI {
     }//fecha mostrarClientes  
     
     public void visualizarClientes() throws ClassNotFoundException, SQLException {
-        List<Cliente> listaClientes = cDAO.retornaClientes();
+        List<Cliente> listaClientes = cDAO.retornaListaClientes();
                 mostrarClientes(listaClientes);        
     }//fecha visualizarClientes
           

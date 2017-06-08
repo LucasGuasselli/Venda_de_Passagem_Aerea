@@ -5,13 +5,18 @@
  */
 package view;
 
+import DAO.AssentosDAO;
+import DAO.AviaoDAO;
+import DAO.ClienteDAO;
+import DAO.VendaDAO;
+import DAO.VooDAO;
+import java.sql.SQLException;
+import java.util.List;
+import model.Assento;
+import model.Aviao;
 import model.Cliente;
 import model.Venda;
 import model.Voo;
-import repositorio.RepositorioAvioes;
-import repositorio.RepositorioClientes;
-import repositorio.RepositorioVendas;
-import repositorio.RepositorioVoos;
 import util.Digita;
 import util.VerificaDatas;
 
@@ -27,43 +32,54 @@ public class VendaUI {
     //atributos
     private Digita d = new Digita();
     private VerificaDatas verifica = new VerificaDatas();
+    private ClienteDAO cDAO = new ClienteDAO();
+    private VooDAO vDAO = new VooDAO();
+    private AviaoDAO aDAO = new AviaoDAO();
+    private VendaDAO vendDAO = new VendaDAO();
+    private AssentosDAO assDAO = new AssentosDAO();
+    private ClienteUI  cliUI = new ClienteUI();
+    private VooUI vooUI = new VooUI();
+    private AviaoUI aviUI = new AviaoUI();
     
    //METODO QUE REALIZA O CADASTRO DA VENDA 
-    public void cadVenda(RepositorioVendas listaVendas, RepositorioClientes listaClientes, RepositorioAvioes listaAvioes, RepositorioVoos listaVoos){
-        ClienteUI cliUI = new ClienteUI();
-        VooUI vooUI = new VooUI();            
-
-        if(listaClientes.getListClientes().size() > 0 || listaVoos.getListVoos().size() > 0 ){
+    public void cadVenda() throws SQLException, ClassNotFoundException{      
+        
+        if(cDAO.verificaExistCliente() == true || vDAO.verificaExistVoo() == true ){
             //variaveis locais
             Cliente cliente = null;
+            Assento assento = null;
+            int numAssento = 0;
             Voo voo = null;
             String rg = "";
             String dataVoo = "";
-            int limit = 10;
             int codigoAviao = 0;
         
             System.out.println("\nClientes cadastrados:\n");
-           // cliUI.showClientes(listaClientes);
+                    List<Cliente> listaCliente = cDAO.retornaListaClientes();
+                        cliUI.mostrarClientes(listaCliente);
             System.out.println("\nVoos cadastrados:\n");
-            //vooUI.showVoos(listaVoos);
+                    List<Voo> listaVoo = vDAO.retornaListaVoos();
+                        vooUI.mostrarVoos(listaVoo);
             
             do{
                 rg = d.digitaRg("\n(min 4 e max 10 digitos)\nInforme o rg do cliente que deseja realizar uma compra: ");
                 
-                if(listaClientes.clienteExist(rg) == true){
-                    cliente = listaClientes.retornaCliente(rg);
+                if(cDAO.verificaClienteRg(rg) == true){
+                    cliente = cDAO.retornaClientePorRg(rg);
                 }else{
                     System.out.println("O rg digitado é nao corresponde a nenhum cliente!");   
                 }//fecha if-else
             }while(cliente == null);
             
             do{
-            codigoAviao = Integer.parseInt(d.digita("\nInforme o codigo do aviao:"));
+                List<Aviao> listaAviao = aDAO.retornaListaAvioes();
+                        aviUI.mostrarAvioes(listaAviao);
+            codigoAviao = Integer.parseInt(d.digita("\nInforme o ID do aviao:"));
             dataVoo = d.digitaData("Informe a data do voo: ");
              
-                if(listaAvioes.AviaoExistByCod(codigoAviao) == true){
-                    if(listaVoos.verificaAviaoData(dataVoo,listaAvioes.retornaAviao(codigoAviao)) == true){
-                        voo = listaVoos.retornaVoo(listaAvioes.retornaAviao(codigoAviao));
+                if(aDAO.verificaAviaoByCod(codigoAviao) == true){
+                    if(vDAO.verificaDataAviao(codigoAviao,dataVoo) == true){
+                        voo = vDAO.retornaVoo(codigoAviao);
                     }else{
                         System.out.println("Aviao nao possui voo para esta data!"); 
                     }//fecha if-else                                           
@@ -71,14 +87,20 @@ public class VendaUI {
                     System.out.println("AVIAO NAO EXISTE");
                 }//fecha-if-else
                }while(voo == null);  
+        
+            vooUI.mostrarAssentos(assDAO.retornaListaAssentos(voo));
+            do{
+                numAssento = Integer.parseInt(d.digita("\nInforme o numero do assento disponivel que voce deseja: "));
+            }while(assDAO.verificaDisponibilidadeAssento(numAssento) == false);
             
-        //voo.reservaAssento();
+            assento = assDAO.retornaAssento(voo,numAssento);
             
         try{
-              listaVendas.addVenda(new Venda(cliente, voo));
+                vendDAO.cadastrarVenda(new Venda(cliente, voo, assento));
                     System.out.println("VENDA CADASTRADA COM SUCESSO!!!");
+                assDAO.editarDisponibilidadeAssento(assento,numAssento);   
             } catch (Exception e){
-                    System.out.println("ERRO ao cadastrar voo");
+                    System.out.println("ERRO ao cadastrar venda");
                 }//try-catch   
         }else{
                 System.out.println("So e permitido realizar uma venda quando tiver pelo menos"
@@ -87,26 +109,26 @@ public class VendaUI {
     
     }//fecha cadVoo
     //METODO QUE MOSTRA TODAS AS VENDAS REALIZADAS 
-    public void verVenda(RepositorioVendas listaVendas) {
-        if(listaVendas.getListVendas().size() <=0){
-           System.out.println("###################################");
-           System.out.println("Nenhuma venda foi realizada!!!!");
-        }else{
-           System.out.println("###################################\n");
-           
-           //formatacao para exibir voos
-           
-            for (Venda venda : listaVendas.getListVendas()) {
-               System.out.println(String.format("%-10s", "CLIENTE") + "\t");
-                    System.out.println(String.format("%-10s", venda.getCliente()) + "\t");
-                        System.out.println(String.format("%-10s", "VOO") + "\t");
-                            System.out.println(String.format("%-10s", venda.getVoo()) + "\t");    
-                                 System.out.println(String.format("%-10s", "ASSENTO RESERVADO") + "\t");
-                                      System.out.println(String.format("%-10s", "Assento n: " +venda.getVoo().getMeuAssento()) + "\t");    
-                                
-            System.out.println("=============================================\n");
-            }//fecha for             
-        }//fechaif-else   
-   }//fecha classe  
+    public void mostrarVendas() throws SQLException, ClassNotFoundException {
+        Cliente cliente = null;
+        Voo voo = null;
+        if (vendDAO.verificaExistVenda() == false) {
+            System.out.println("\nVenda(s) nao encontrada(s)!");
+        } else {
+          List<Venda> listaVenda = vendDAO.retornaListaVenda(cDAO,vDAO,assDAO);
+            for (Venda venda : listaVenda){
+                cliente = cDAO.retornaClientePorId(venda.getIdCliente());
+                voo = vDAO.retornaVoo(venda.getIdVoo());            
+                System.out.println("###################################\n");
+
+            System.out.println(String.format("%-10s", "CLIENTE") + "\t");
+                System.out.println(String.format("%-10s", cliente.toString()) + "\t" );
+                    System.out.println(String.format("%-10s", "VOO") + "\t");
+                        System.out.println(String.format("%-10s", voo.toString()) + "\t" );
+                            System.out.println(String.format("%-10s", "HORA DA COMPRA") + "\t"); 
+                                System.out.println(venda.getHoraCompra());
+            }//fecha for
+        }//fecha if-else 
+    }//fecha mostrarVendas
     
 }//fecha classe

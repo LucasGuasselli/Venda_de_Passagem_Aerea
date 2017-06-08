@@ -171,7 +171,7 @@ public class ClienteDAO {
         return (null);
     }//fecha metodo procurarPorId
        
-    public List<Cliente> retornaClientes() throws ClassNotFoundException, SQLException {
+    public List<Cliente> retornaListaClientes() throws ClassNotFoundException, SQLException {
         List<Cliente> listaClientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
         try {
@@ -232,6 +232,22 @@ public class ClienteDAO {
                 return false; 
     }//fecha metodo verificaNome
      
+    public boolean verificaExistCliente() throws SQLException, ClassNotFoundException {
+        try{
+            String sql = "SELECT * FROM cliente";      
+                conectar(sql);
+            ResultSet resultado = comando.executeQuery();
+                if(resultado.next()) {                
+                    return true;
+                }//fecha if
+        }catch (SQLException e) {
+                throw new SQLException("\nErro ao verificar cliente!");
+        } finally {
+            conexao.close();
+            comando.close();
+        }//fecha finally
+                   return false;   
+    }//fecha verificaExistCliente
 }//fecha classe
 
 

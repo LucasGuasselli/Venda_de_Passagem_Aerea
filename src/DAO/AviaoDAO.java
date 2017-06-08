@@ -142,7 +142,7 @@ public class AviaoDAO {
         }//fecha finally
     }//fecha metodo listarPorNome
     
-    public List<Aviao> retornalistarAvioes() throws ClassNotFoundException, SQLException {
+    public List<Aviao> retornaListaAvioes() throws ClassNotFoundException, SQLException {
         List<Aviao> listaAvioes = new ArrayList<>();
         String sql = "SELECT * FROM aviao";
 

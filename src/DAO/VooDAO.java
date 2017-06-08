@@ -62,7 +62,7 @@ public class VooDAO {
         }//fecha finally
     }//fecha cadastrarVoo
     
-    public List<Voo> retornalistarVoos() throws ClassNotFoundException, SQLException {
+    public List<Voo> retornaListaVoos() throws ClassNotFoundException, SQLException {
         List<Voo> listaVoos = new ArrayList<>();        
         try {
             String sql = "SELECT * FROM voo";
@@ -75,8 +75,8 @@ public class VooDAO {
                 String destino = resultado.getString("destino");
                 Date dataSql = resultado.getDate("dataVoo");
                 LocalDate horarioVoo = dataSql.toLocalDate();
-                int id = resultado.getInt("id");   
-                Aviao aviao = (aDAO.retornaAviaoByCod(id));
+                int idAviao = resultado.getInt("idAviao");   
+                Aviao aviao = (aDAO.retornaAviaoByCod(idAviao));
                 
                 Voo voo = new Voo(idVoo, origem, destino, horarioVoo, aviao);
                     listaVoos.add(voo);                    
@@ -166,8 +166,8 @@ public class VooDAO {
                 String destino = resultado.getString("destino");
                 Date dataSql = resultado.getDate("dataVoo");
                 LocalDate horarioVoo = dataSql.toLocalDate();
-                int id = resultado.getInt("id");   
-                Aviao aviao = (aDAO.retornaAviaoByCod(id));
+                int idAviao = resultado.getInt("idAviao");   
+                Aviao aviao = (aDAO.retornaAviaoByCod(idAviao));
                 
                voo = new Voo(idVoo, origem, destino, horarioVoo, aviao);                              
             }//fecha while

@@ -41,6 +41,7 @@ public class RepositorioVendas {
     *Verifica se a venda existe por meio do cliente
     *Se o cliente tiver realizado uma compra, return TRUE, se não return FALSE;
     */
+    /*
     public boolean VendaExist(Cliente cliente) {
         for (Venda venda : vendas) {
             if (venda.getCliente() == cliente) {
@@ -54,16 +55,17 @@ public class RepositorioVendas {
     *Procura vendas realizadas pelos clientes existentes no Array 
     *se a condicao for verdadeira, retorna o objeto VENDA, se nao retorna NULL
     */
+    /*
     public boolean searchVendaByCliente(Cliente cliente) {
        
         for (Venda venda : vendas) {
-            if (venda.getCliente() == cliente) {
+          //  if (venda.getCliente() == cliente) {
                 System.out.println("###################################\n");
                     System.out.println(String.format("%-10s", "CLIENTE") + "\t");
-                       System.out.println(String.format("%-10s", venda.getCliente()) + "\t" );
+            //           System.out.println(String.format("%-10s", venda.getCliente()) + "\t" );
                             System.out.println(String.format("%-10s", "VOO") + "\t");
-                               System.out.println(String.format("%-10s", venda.getVoo()) + "\t" );
-                                    System.out.println(String.format("%-10s", "HORA DA COMPRA") + "\t"); 
+               //                System.out.println(String.format("%-10s", venda.getVoo()) + "\t" );
+               //                     System.out.println(String.format("%-10s", "HORA DA COMPRA") + "\t"); 
                                         System.out.println(venda.getHoraCompra()); 
                        return true;
            }//fecha if
@@ -72,4 +74,5 @@ public class RepositorioVendas {
         return false;
       
     }//fecha searchCliente
+*/
 }//fecha classe

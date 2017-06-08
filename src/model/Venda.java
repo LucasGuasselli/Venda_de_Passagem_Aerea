@@ -16,39 +16,43 @@ import java.time.LocalDate;
  */
 public class Venda {
     //atributos
-    private Cliente cliente;
-    private Voo voo;
+    private int idCliente;
+    private int idVoo;
     private LocalDate horaCompra;
+    private int numAssento;
     
     //construtor
-    public Venda(Cliente cliente, Voo voo){
-        this.cliente = cliente;
-        this.voo = voo;
-        this.horaCompra = LocalDate.now();
-        
+    public Venda(Cliente cliente, Voo voo, Assento assento){
+        this.idCliente = cliente.getId();
+        this.idVoo = voo.getIdVoo();
+        this.horaCompra = LocalDate.now(); 
+        this.numAssento = assento.getNumAssento();
     }//fecha construtor
 
     //metodos
     
-    //SETS E GETS
-    
-    public void setVoo(Voo voo) {
-        this.voo = voo;
+    //SETS E GETS   
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+    public void setIdVoo(int idVoo) {
+        this.idVoo = idVoo;
+    }   
+    public void setNumAssento(int numAssento) {
+        this.numAssento = numAssento;
     }
     
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public int getIdCliente() {
+        return idCliente;
+    }
+    public int getIdVoo() {
+        return idVoo;
+    }
+    public int getNumAssento() {
+        return numAssento;
     }
 
-    //TERMINA SET
-    public Voo getVoo() {
-        return voo;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-   
     public LocalDate getHoraCompra() {
         return horaCompra;
     }

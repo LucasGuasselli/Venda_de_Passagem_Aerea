@@ -142,7 +142,7 @@ public class AviaoUI {
             System.out.println(String.format("%-10s", "ID") + "\t"
                     + String.format("%-20s", "|CODIGO") + "\t"
                     + String.format("%-20s", "|NOME") + "\t"
-                    + String.format("%-15s", "|TELEFONE"));
+                    + String.format("%-15s", "|QUANTIDADE DE ASSENTOS"));
             for (Aviao aviao : listaAvioes) {
                 System.out.println(String.format("%-10s", aviao.getId()) + "\t"
                         + String.format("%-20s", "|" + aviao.getCodigo()) + "\t"
@@ -153,7 +153,7 @@ public class AviaoUI {
     }//fecha mostrarClientes  
     
     public void visualizarAvioes() throws ClassNotFoundException, SQLException {
-        List<Aviao> listaAvioes = aDAO.retornalistarAvioes();
+        List<Aviao> listaAvioes = aDAO.retornaListaAvioes();
                 mostrarAvioes(listaAvioes);        
     }//fecha visualizarClientes
           
