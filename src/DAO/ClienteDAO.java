@@ -149,8 +149,9 @@ public class ClienteDAO {
     public Cliente retornaClientePorId(int _id)throws SQLException, ClassNotFoundException {
         try{
             String sql = "SELECT * FROM cliente WHERE idCliente = ?";
-                   comando.setInt(1,_id);
-            ResultSet resultado = comando.executeQuery(sql);
+            conestar(sql);       
+            comando.setInt(1,_id);
+            ResultSet resultado = comando.executeQuery();
 
             if (resultado.next()) {
                 int id = resultado.getInt("idCliente");
